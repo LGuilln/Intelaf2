@@ -23,7 +23,7 @@ public class Conexion {
     private final String driver = "com.mysql.jdbc.Driver";
     private final String user = "root";
     private final String password = "12345";
-    private final String url = "jdbc:mysql://localhost:3306/B1";
+    private final String url = "jdbc:mysql://localhost:3306/Intelaf";
     private final String segura = "jdbc:mysql://host:port/database?useSSL=false";
     
 
