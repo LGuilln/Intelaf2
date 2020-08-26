@@ -17,7 +17,7 @@ public class Generar_Venta {
     private int cantidad;
     private int cantidadProducto;
 
-    public Generar_Venta(int codigoPedido, String codigoProducto,int cantidad, int cantidadProducto) {
+    public Generar_Venta(int codigoPedido, String codigoProducto, int cantidad, int cantidadProducto) {
         this.codigoPedido = codigoPedido;
         this.codigoProducto = codigoProducto;
         this.cantidad = cantidad;
@@ -40,7 +40,6 @@ public class Generar_Venta {
         this.codigoProducto = codigoProducto;
     }
 
-    
     public int getCantidad() {
         return cantidad;
     }
@@ -48,7 +47,7 @@ public class Generar_Venta {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
+
     public int getCantidadProducto() {
         return cantidadProducto;
     }

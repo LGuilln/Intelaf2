@@ -18,15 +18,14 @@ public class Generar_Pedido {
     private double totalP;
     private int cantidadProducto;
 
-        public Generar_Pedido(int codigoPedido, String codigoProducto,int cantidad,double totalP) {
+    public Generar_Pedido(int codigoPedido, String codigoProducto, int cantidad, double totalP) {
         this.codigoPedido = codigoPedido;
         this.codigoProducto = codigoProducto;
         this.cantidad = cantidad;
         this.totalP = totalP;
     }
 
-    
-    public Generar_Pedido(int codigoPedido, String codigoProducto,int cantidad,double totalP, int cantidadProducto) {
+    public Generar_Pedido(int codigoPedido, String codigoProducto, int cantidad, double totalP, int cantidadProducto) {
         this.codigoPedido = codigoPedido;
         this.codigoProducto = codigoProducto;
         this.cantidad = cantidad;
@@ -50,7 +49,6 @@ public class Generar_Pedido {
         this.codigoProducto = codigoProducto;
     }
 
-    
     public int getCantidad() {
         return cantidad;
     }
@@ -58,7 +56,7 @@ public class Generar_Pedido {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
+
     public int getCantidadProducto() {
         return cantidadProducto;
     }
@@ -67,14 +65,12 @@ public class Generar_Pedido {
         this.cantidadProducto = cantidadProducto;
     }
 
-    
-    public double getTotalP(){
+    public double getTotalP() {
         return totalP;
     }
-    
-    public void setTotalP(double totalP){
+
+    public void setTotalP(double totalP) {
         this.totalP = totalP;
     }
-    
-    
+
 }

@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class Producto_DB extends Conexion {
 
-    public boolean insertarProduto(Producto producto) {
+    public boolean insertarProducto(Producto producto) {
 
         PreparedStatement ps = null;
         Connection conexion = obtenerConexion();

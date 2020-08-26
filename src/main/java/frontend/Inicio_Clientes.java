@@ -38,10 +38,7 @@ public class Inicio_Clientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ingresoNombre = new javax.swing.JTextField();
-        jLabelNombre = new javax.swing.JLabel();
         botonIngresar = new javax.swing.JButton();
-        errordatos = new javax.swing.JLabel();
         logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,22 +46,13 @@ public class Inicio_Clientes extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 255, 51));
         setForeground(new java.awt.Color(102, 255, 51));
 
-        ingresoNombre.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-
-        jLabelNombre.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
-        jLabelNombre.setText("NIT Cliente:");
-
         botonIngresar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        botonIngresar.setText("Ingresar");
+        botonIngresar.setText("Bienvenido");
         botonIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonIngresarActionPerformed(evt);
             }
         });
-
-        errordatos.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        errordatos.setForeground(new java.awt.Color(153, 0, 0));
-        errordatos.setText("No se Encuentra Código");
 
         logo.setText("Icono");
 
@@ -73,45 +61,31 @@ public class Inicio_Clientes extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 272, Short.MAX_VALUE)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(247, 247, 247))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(292, 292, 292)
-                        .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(242, 242, 242)
-                        .addComponent(errordatos))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jLabelNombre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ingresoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addGap(285, 285, 285)
+                .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ingresoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombre))
-                .addGap(55, 55, 55)
-                .addComponent(errordatos, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addGap(145, 145, 145)
                 .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresarActionPerformed
-
+        this.setVisible(false);
+        new Principal_C().setVisible(true);
+        
     }//GEN-LAST:event_botonIngresarActionPerformed
 
     /**
@@ -163,9 +137,6 @@ public class Inicio_Clientes extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonIngresar;
-    private javax.swing.JLabel errordatos;
-    private javax.swing.JTextField ingresoNombre;
-    private javax.swing.JLabel jLabelNombre;
     public javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 }

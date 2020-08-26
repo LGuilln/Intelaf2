@@ -5,18 +5,29 @@
  */
 package frontend.empleados;
 
+import conexion_DB.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author lguilln
  */
 public class Ver_Tienda extends javax.swing.JInternalFrame {
 
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
     /**
      * Creates new form Registrar_Producto
      */
     public Ver_Tienda() {
         initComponents();
-        
+
     }
 
     /**
@@ -29,12 +40,13 @@ public class Ver_Tienda extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         lblNombre = new javax.swing.JLabel();
-        tiendaNombre = new javax.swing.JTextField();
-        lblCodigo = new javax.swing.JLabel();
-        tiendaCodigo = new javax.swing.JTextField();
-        registrar = new javax.swing.JButton();
-        registrar1 = new javax.swing.JButton();
-        buscarTiendas = new javax.swing.JButton();
+        clienteNombre = new javax.swing.JTextField();
+        lblNit = new javax.swing.JLabel();
+        codigo = new javax.swing.JTextField();
+        nombre = new javax.swing.JButton();
+        buscarCliente1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaTiendas = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -45,113 +57,192 @@ public class Ver_Tienda extends javax.swing.JInternalFrame {
         lblNombre.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         lblNombre.setText("Nombre:");
 
-        tiendaNombre.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        tiendaNombre.addActionListener(new java.awt.event.ActionListener() {
+        clienteNombre.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        clienteNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tiendaNombreActionPerformed(evt);
+                clienteNombreActionPerformed(evt);
             }
         });
 
-        lblCodigo.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        lblCodigo.setText("Código:");
+        lblNit.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        lblNit.setText("Codigo:");
 
-        tiendaCodigo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        codigo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
 
-        registrar.setBackground(new java.awt.Color(102, 255, 0));
-        registrar.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar.setText("Registrar");
-        registrar.addActionListener(new java.awt.event.ActionListener() {
+        nombre.setBackground(new java.awt.Color(102, 255, 0));
+        nombre.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        nombre.setText("Buscar");
+        nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarActionPerformed(evt);
+                nombreActionPerformed(evt);
             }
         });
 
-        registrar1.setBackground(new java.awt.Color(102, 255, 0));
-        registrar1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar1.setText("Atras");
-        registrar1.addActionListener(new java.awt.event.ActionListener() {
+        buscarCliente1.setBackground(new java.awt.Color(102, 255, 0));
+        buscarCliente1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        buscarCliente1.setText("All");
+        buscarCliente1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrar1ActionPerformed(evt);
+                buscarCliente1ActionPerformed(evt);
             }
         });
 
-        buscarTiendas.setBackground(new java.awt.Color(102, 255, 0));
-        buscarTiendas.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        buscarTiendas.setText("Buscar");
-        buscarTiendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarTiendasActionPerformed(evt);
+        tablaTiendas.setBackground(new java.awt.Color(254, 254, 254));
+        tablaTiendas.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
+        tablaTiendas.setForeground(new java.awt.Color(1, 1, 1));
+        tablaTiendas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Dirección", "Código", "Teléfono 1", "Teléfono 2", "Correo Electrónico", "Horario"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(tablaTiendas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(239, Short.MAX_VALUE)
-                .addComponent(registrar)
-                .addGap(284, 284, 284)
-                .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(477, 477, 477))
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(lblNombre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tiendaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(lblCodigo)
-                .addGap(18, 18, 18)
-                .addComponent(tiendaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
-                .addComponent(buscarTiendas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblNit, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(lblNombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clienteNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addComponent(nombre)
+                        .addGap(18, 18, 18)
+                        .addComponent(buscarCliente1)))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tiendaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombre)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblCodigo)
-                        .addComponent(tiendaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buscarTiendas)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 609, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registrar)
-                    .addComponent(registrar1))
-                .addGap(44, 44, 44))
+                        .addComponent(clienteNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNombre)
+                        .addComponent(nombre)
+                        .addComponent(buscarCliente1))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblNit)
+                        .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrarActionPerformed
+    public void limpiarCampos() {
+        nombre.setText("");
+        codigo.setText("");
+    }
 
-    private void registrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrar1ActionPerformed
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        String nombreS = nombre.getText();
+        String codigoS = codigo.getText();
+        String where = "";
 
-    private void buscarTiendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTiendasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarTiendasActionPerformed
+        if (!"".equals(nombreS) || !"".equals(codigoS)) {
+            where = "WHERE Nombre_Tienda = '" + nombreS + "' OR Codigo_Tienda ='" + codigoS + "'";
+        }
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaTiendas.setModel(model);
+            Conexion con = new Conexion();
+            Connection c = con.obtenerConexion();
 
-    private void tiendaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiendaNombreActionPerformed
+            String sql = "SELECT * FROM TIENDA " + where;
+            ps = c.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadC = rsMd.getColumnCount();
+
+            model.addColumn("Nombre");
+            model.addColumn("Dirección");
+            model.addColumn("Código");
+            model.addColumn("Teléfono 1");
+            model.addColumn("Teléfono 2");
+            model.addColumn("Correo Electrónico");
+            model.addColumn("Horario");
+            while (rs.next()) {
+
+                Object[] filas = new Object[cantidadC];
+                for (int i = 0; i < cantidadC; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                model.addRow(filas);
+                limpiarCampos();
+            }
+        } catch (SQLException ex) {
+        }
+    }//GEN-LAST:event_nombreActionPerformed
+
+    private void clienteNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tiendaNombreActionPerformed
+    }//GEN-LAST:event_clienteNombreActionPerformed
+
+    private void buscarCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCliente1ActionPerformed
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaTiendas.setModel(model);
+            Conexion con = new Conexion();
+            Connection c = con.obtenerConexion();
+
+            String sql = "SELECT * FROM TIENDA ";
+            ps = c.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadC = rsMd.getColumnCount();
+
+            model.addColumn("Nombre");
+            model.addColumn("Dirección");
+            model.addColumn("Código");
+            model.addColumn("Teléfono 1");
+            model.addColumn("Teléfono 2");
+            model.addColumn("Correo Electrónico");
+            model.addColumn("Horario");
+            while (rs.next()) {
+
+                Object[] filas = new Object[cantidadC];
+                for (int i = 0; i < cantidadC; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                model.addRow(filas);
+                limpiarCampos();
+            }
+        } catch (SQLException ex) {
+        }    }//GEN-LAST:event_buscarCliente1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buscarTiendas;
-    private javax.swing.JLabel lblCodigo;
+    private javax.swing.JButton buscarCliente1;
+    private javax.swing.JTextField clienteNombre;
+    private javax.swing.JTextField codigo;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblNit;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JButton registrar;
-    private javax.swing.JButton registrar1;
-    private javax.swing.JTextField tiendaCodigo;
-    private javax.swing.JTextField tiendaNombre;
+    private javax.swing.JButton nombre;
+    private javax.swing.JTable tablaTiendas;
     // End of variables declaration//GEN-END:variables
 }

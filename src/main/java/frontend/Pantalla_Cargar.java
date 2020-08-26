@@ -17,18 +17,17 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 /**
  *
  * @author lguilln
  */
 public class Pantalla_Cargar extends javax.swing.JFrame {
- private File file;
- private String rutaArchivo;
- 
- 
- String Icono =  "logo2.png";
-    
+
+    private File file;
+    private String rutaArchivo;
+
+    String Icono = "logo2.png";
+
     /**
      * Creates new form Inicio
      */
@@ -152,29 +151,32 @@ public class Pantalla_Cargar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargarActionPerformed
-    if(file==null){
+        if (file == null) {
             lblMsgError.setText("Este Archivo No Existe");//si el archivo es null, se muestra el mensaje de error
-        }else{
-            if(file.isFile()){
+        } else {
+            if (file.isFile()) {
                 Archivo_Entrada lector = new Archivo_Entrada();
                 try {
                     lector.leerArchivo(file);
                 } catch (IOException ex) {
                     Logger.getLogger(Pantalla_Cargar.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else{
+            } else {
                 lblMsgError.setText("Elija un Archivo .txt");
             }
-        }    // TODO add your handling code here:
+        }
+        this.setVisible(false);
+        new Principal_E().setVisible(true);
+
     }//GEN-LAST:event_botonCargarActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-    pathArchivo.setText(buscarArchivoTxt());
+        pathArchivo.setText(buscarArchivoTxt());
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     private void botonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasActionPerformed
-     this.setVisible(false);
-     new Principal_E().setVisible(true);
+        this.setVisible(false);
+        new Principal_E().setVisible(true);
     }//GEN-LAST:event_botonAtrasActionPerformed
 
     private void pathArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pathArchivoActionPerformed
@@ -218,31 +220,29 @@ public class Pantalla_Cargar extends javax.swing.JFrame {
             }
         });
     }
-    
-     private String buscarArchivoTxt(){
+
+    private String buscarArchivoTxt() {
         JFileChooser buscador = new JFileChooser();  // Agregamos un JFileChooser para buscar el archivo que queremos leer  
         //buscador.setFileSelectionMode(JFileChooser.FILES_ONLY);
         FileFilter filter = new FileNameExtensionFilter("*.txt", "txt", "text");
         buscador.setFileFilter(filter);
-        
+
         buscador.showOpenDialog(this);
         file = buscador.getSelectedFile(); //El archivo seleccionado es el que agregamos a nuestra variable de tipo file
-        if(file == null){//si el archivo es nulo
-            rutaArchivo="";        // entonces la dirrecion sera vacia
-        }else{
-        rutaArchivo = buscador.getSelectedFile().getAbsolutePath();  //si no es nulo entonces le asignaremos el path a nuestra var
+        if (file == null) {//si el archivo es nulo
+            rutaArchivo = "";        // entonces la dirrecion sera vacia
+        } else {
+            rutaArchivo = buscador.getSelectedFile().getAbsolutePath();  //si no es nulo entonces le asignaremos el path a nuestra var
         }
         return rutaArchivo;//retornamos el path
     }
-    
-    
-     public void cargarIcono(String NombreImagen)
-    {
+
+    public void cargarIcono(String NombreImagen) {
         ImageIcon imageIcon = new ImageIcon(getClass().getClassLoader().getResource(NombreImagen));
         ImageIcon imageIconFinal = new ImageIcon(imageIcon.getImage().getScaledInstance(logo.getWidth(), logo.getHeight(), Image.SCALE_DEFAULT));
         logo.setIcon(imageIconFinal);
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAtras;

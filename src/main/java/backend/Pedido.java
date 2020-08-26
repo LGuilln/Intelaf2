@@ -27,23 +27,22 @@ public class Pedido {
     private String codigoProducto;
     private int cantidad;
     private int cantidadProducto;
-     private double totalP;
-   
-    public Pedido(int codigoPedido, String tienda1, String tienda2, String fecha1, String NITCliente, String codigoProducto,int cantidad,double totalP, double anticipoTotal) {
+    private double totalP;
+
+    public Pedido(int codigoPedido, String tienda1, String tienda2, String fecha1, String NITCliente, String codigoProducto, int cantidad, double totalP, double anticipoTotal) {
         this.codigoPedido = codigoPedido;
         this.tienda1 = tienda1;
         this.tienda2 = tienda2;
         this.fecha1 = fecha1;
         this.NITCliente = NITCliente;
         this.anticipoTotal = anticipoTotal;
-        
+
         this.codigoProducto = codigoProducto;
         this.cantidad = cantidad;
         this.totalP = totalP;
     }
-    
-    
-    public Pedido(int codigoPedido, String tienda1, String tienda2, String fecha1, String NITCliente, double total, double anticipoTotal,double totalRestante, String fecha2 ,int tiempoDias, String curso ) {
+
+    public Pedido(int codigoPedido, String tienda1, String tienda2, String fecha1, String NITCliente, double total, double anticipoTotal, double totalRestante, String fecha2, int tiempoDias, String curso) {
         this.codigoPedido = codigoPedido;
         this.tienda1 = tienda1;
         this.tienda2 = tienda2;
@@ -114,17 +113,15 @@ public class Pedido {
     public void setTotal(double total) {
         this.total = total;
     }
-    
-    
-     public double getTotalRestante() {
+
+    public double getTotalRestante() {
         return totalRestante;
     }
 
     public void setTotalRestante(double totalRestante) {
         this.totalRestante = totalRestante;
     }
-    
-    
+
     public String getFecha2() {
         return fecha2;
     }
@@ -132,7 +129,7 @@ public class Pedido {
     public void setFecha2(String fecha2) {
         this.fecha2 = fecha2;
     }
-    
+
     public int getTiempoDias() {
         return tiempoDias;
     }
@@ -140,7 +137,7 @@ public class Pedido {
     public void setTiempoDias(String TiempoDias) {
         this.tiempoDias = tiempoDias;
     }
-    
+
     public String getCurso() {
         return curso;
     }
@@ -148,13 +145,8 @@ public class Pedido {
     public void setCurso(String curso) {
         this.curso = curso;
     }
-    
-    
-    
-    
-    
-    
-   public String getCodigoProducto() {
+
+    public String getCodigoProducto() {
         return codigoProducto;
     }
 
@@ -162,7 +154,6 @@ public class Pedido {
         this.codigoProducto = codigoProducto;
     }
 
-    
     public int getCantidad() {
         return cantidad;
     }
@@ -170,7 +161,7 @@ public class Pedido {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
+
     public int getCantidadProducto() {
         return cantidadProducto;
     }
@@ -179,13 +170,12 @@ public class Pedido {
         this.cantidadProducto = cantidadProducto;
     }
 
-    
-    public double getTotalP(){
+    public double getTotalP() {
         return totalP;
     }
-    
-    public void setTotalP(double totalP){
+
+    public void setTotalP(double totalP) {
         this.totalP = totalP;
     }
-    
+
 }

@@ -5,12 +5,23 @@
  */
 package frontend.empleados;
 
+import conexion_DB.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author lguilln
  */
 public class Ver_Cliente extends javax.swing.JInternalFrame {
 
+    PreparedStatement ps = null;
+      ResultSet rs = null;
+    
     /**
      * Creates new form Registrar_Producto
      */
@@ -31,10 +42,11 @@ public class Ver_Cliente extends javax.swing.JInternalFrame {
         lblNombre = new javax.swing.JLabel();
         clienteNombre = new javax.swing.JTextField();
         lblNit = new javax.swing.JLabel();
-        clienteNit = new javax.swing.JTextField();
-        registrar = new javax.swing.JButton();
-        registrar1 = new javax.swing.JButton();
-        buscarCliente = new javax.swing.JButton();
+        nit = new javax.swing.JTextField();
+        nombre = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaClientes = new javax.swing.JTable();
+        buscarCliente1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -55,32 +67,44 @@ public class Ver_Cliente extends javax.swing.JInternalFrame {
         lblNit.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         lblNit.setText("Nit:");
 
-        clienteNit.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        nit.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
 
-        registrar.setBackground(new java.awt.Color(102, 255, 0));
-        registrar.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar.setText("Registrar");
-        registrar.addActionListener(new java.awt.event.ActionListener() {
+        nombre.setBackground(new java.awt.Color(102, 255, 0));
+        nombre.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        nombre.setText("Buscar");
+        nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarActionPerformed(evt);
+                nombreActionPerformed(evt);
             }
         });
 
-        registrar1.setBackground(new java.awt.Color(102, 255, 0));
-        registrar1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar1.setText("Atras");
-        registrar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrar1ActionPerformed(evt);
+        tablaClientes.setBackground(new java.awt.Color(254, 254, 254));
+        tablaClientes.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
+        tablaClientes.setForeground(new java.awt.Color(1, 1, 1));
+        tablaClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "NIT", "Teléfono", "Credito", "DPI", "Correo Electrónico", "Dirección"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(tablaClientes);
 
-        buscarCliente.setBackground(new java.awt.Color(102, 255, 0));
-        buscarCliente.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        buscarCliente.setText("Buscar");
-        buscarCliente.addActionListener(new java.awt.event.ActionListener() {
+        buscarCliente1.setBackground(new java.awt.Color(102, 255, 0));
+        buscarCliente1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        buscarCliente1.setText("All");
+        buscarCliente1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarClienteActionPerformed(evt);
+                buscarCliente1ActionPerformed(evt);
             }
         });
 
@@ -92,20 +116,20 @@ public class Ver_Cliente extends javax.swing.JInternalFrame {
                 .addGap(82, 82, 82)
                 .addComponent(lblNit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clienteNit, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nit, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(lblNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(clienteNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
-                .addComponent(buscarCliente)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addComponent(nombre)
+                .addGap(18, 18, 18)
+                .addComponent(buscarCliente1)
+                .addContainerGap(55, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(registrar)
-                .addGap(284, 284, 284)
-                .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(477, 477, 477))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1086, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,44 +139,114 @@ public class Ver_Cliente extends javax.swing.JInternalFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(clienteNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblNombre)
-                        .addComponent(buscarCliente))
+                        .addComponent(nombre)
+                        .addComponent(buscarCliente1))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblNit)
-                        .addComponent(clienteNit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 609, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registrar)
-                    .addComponent(registrar1))
-                .addGap(44, 44, 44))
+                        .addComponent(nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrarActionPerformed
-
-    private void registrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrar1ActionPerformed
-
-    private void buscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarClienteActionPerformed
+      public void limpiarCampos(){
+        nombre.setText("");
+        nit.setText("");
+    }
+    
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+         String campo = nombre.getText();
+        String campo1 = nit.getText();
+        String where = "";
+        
+        if(!"".equals(campo)||!"".equals(campo1)){
+            where = "WHERE Nombre_Cliente = '" + campo + "' OR NIT_Cliente ='" + campo1 + "'";
+               }
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaClientes.setModel(model);
+            Conexion con = new Conexion();
+            Connection c = con.obtenerConexion();
+            
+            String sql = "SELECT * FROM CLIENTE " + where ;
+            ps = c.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadC = rsMd.getColumnCount();
+            
+            model.addColumn("Nombre");
+            model.addColumn("NIT");
+            model.addColumn("Teléfono");
+            model.addColumn("Crédito");
+            model.addColumn("DPI");
+            model.addColumn("Correo Eléctronico");
+            model.addColumn("Dirección");
+            
+            while(rs.next()){
+                
+                Object [] filas = new Object[cantidadC];
+                for(int i = 0; i< cantidadC; i++){
+                  filas[i] = rs.getObject(i + 1);
+            }
+                model.addRow(filas);                
+                limpiarCampos();
+            }
+        }catch(SQLException ex) {         
+        }
+    }//GEN-LAST:event_nombreActionPerformed
 
     private void clienteNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_clienteNombreActionPerformed
 
+    private void buscarCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCliente1ActionPerformed
+try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaClientes.setModel(model);
+            Conexion con = new Conexion();
+            Connection c = con.obtenerConexion();
+            
+            String sql = "SELECT * FROM CLIENTE ";
+            ps = c.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadC = rsMd.getColumnCount();
+            
+            model.addColumn("Nombre");
+            model.addColumn("NIT");
+            model.addColumn("Teléfono");
+            model.addColumn("Crédito");
+            model.addColumn("DPI");
+            model.addColumn("Correo Eléctronico");
+            model.addColumn("Dirección");
+            
+            while(rs.next()){
+                
+                Object [] filas = new Object[cantidadC];
+                for(int i = 0; i< cantidadC; i++){
+                  filas[i] = rs.getObject(i + 1);
+            }
+                model.addRow(filas);                
+               
+            }
+        }catch(SQLException ex) {         
+        }
+    }//GEN-LAST:event_buscarCliente1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buscarCliente;
-    private javax.swing.JTextField clienteNit;
+    private javax.swing.JButton buscarCliente1;
     private javax.swing.JTextField clienteNombre;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNit;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JButton registrar;
-    private javax.swing.JButton registrar1;
+    private javax.swing.JTextField nit;
+    private javax.swing.JButton nombre;
+    private javax.swing.JTable tablaClientes;
     // End of variables declaration//GEN-END:variables
 }

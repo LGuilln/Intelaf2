@@ -11,31 +11,26 @@ import frontend.Inicio_Empleados;
 import frontend.Pantalla_Cargar;
 import java.sql.SQLException;
 
-
 /**
  *
  * @author lguilln
  */
 public class Main {
-    
-    public static void main(String[] args) throws SQLException{
-        
-       Inicio_Empleados inicio = new Inicio_Empleados();
-       Empleado tienda =inicio.verificarEstado_DB();
-       
-       
-        if(tienda == null){
-       Pantalla_Cargar archivoEntrada = new Pantalla_Cargar();
-       archivoEntrada.setVisible(true);        
-        
-            
-        }else{
+
+    public static void main(String[] args) throws SQLException {
+        Conexion cb1 = new Conexion();
+        cb1.obtenerConexion();
+        usuario user = new usuario();
+        Tienda tienda = user.verificarEstadoDB();
+
+        if (tienda == null) {
+            Pantalla_Cargar archivoEntrada = new Pantalla_Cargar();
+            archivoEntrada.setVisible(true);
+
+        } else {
             Bienvenida iniciar = new Bienvenida();
             iniciar.setVisible(true);
         }
-        
- Conexion cb1= new Conexion();
-        cb1.obtenerConexion(); 
 
     }
 

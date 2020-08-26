@@ -5,6 +5,14 @@
  */
 package frontend.empleados;
 
+import conexion_DB.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author lguilln
@@ -19,6 +27,11 @@ public class Ver_Tiempo_Tienda extends javax.swing.JInternalFrame {
         
     }
 
+     public void limpiarCampos(){
+        tienda.setText("");
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,10 +42,11 @@ public class Ver_Tiempo_Tienda extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         lblNombre = new javax.swing.JLabel();
-        registrar = new javax.swing.JButton();
-        registrar1 = new javax.swing.JButton();
-        buscarTiempoTienda = new javax.swing.JButton();
-        tiempoTienda1 = new javax.swing.JComboBox<>();
+        nombre = new javax.swing.JButton();
+        buscarCliente1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaTiempo = new javax.swing.JTable();
+        tienda = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -44,110 +58,166 @@ public class Ver_Tiempo_Tienda extends javax.swing.JInternalFrame {
         lblNombre.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblNombre.setText("Código Tienda:");
 
-        registrar.setBackground(new java.awt.Color(102, 255, 0));
-        registrar.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar.setText("Registrar");
-        registrar.addActionListener(new java.awt.event.ActionListener() {
+        nombre.setBackground(new java.awt.Color(102, 255, 0));
+        nombre.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        nombre.setText("Buscar");
+        nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarActionPerformed(evt);
+                nombreActionPerformed(evt);
             }
         });
 
-        registrar1.setBackground(new java.awt.Color(102, 255, 0));
-        registrar1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar1.setText("Atras");
-        registrar1.addActionListener(new java.awt.event.ActionListener() {
+        buscarCliente1.setBackground(new java.awt.Color(102, 255, 0));
+        buscarCliente1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        buscarCliente1.setText("All");
+        buscarCliente1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrar1ActionPerformed(evt);
+                buscarCliente1ActionPerformed(evt);
             }
         });
 
-        buscarTiempoTienda.setBackground(new java.awt.Color(102, 255, 0));
-        buscarTiempoTienda.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        buscarTiempoTienda.setText("Buscar");
-        buscarTiempoTienda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarTiempoTiendaActionPerformed(evt);
-            }
-        });
+        tablaTiempo.setBackground(new java.awt.Color(254, 254, 254));
+        tablaTiempo.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
+        tablaTiempo.setForeground(new java.awt.Color(1, 1, 1));
+        tablaTiempo.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        tiempoTienda1.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-        tiempoTienda1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tiempoTienda1ItemStateChanged(evt);
+            },
+            new String [] {
+                "Codigo", "Tienda Origen", "Tienda Destino", "Tiempo En Días"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
-        tiempoTienda1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tiempoTienda1MouseClicked(evt);
-            }
-        });
+        jScrollPane1.setViewportView(tablaTiempo);
+
+        tienda.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(153, Short.MAX_VALUE)
-                .addComponent(registrar)
-                .addGap(284, 284, 284)
-                .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(525, 525, 525))
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(lblNombre)
-                .addGap(34, 34, 34)
-                .addComponent(tiempoTienda1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(tienda, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buscarTiempoTienda)
-                .addGap(135, 135, 135))
+                .addComponent(nombre)
+                .addGap(18, 18, 18)
+                .addComponent(buscarCliente1)
+                .addGap(129, 129, 129))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1069, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNombre)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tiempoTienda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buscarTiempoTienda)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 580, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registrar)
-                    .addComponent(registrar1))
-                .addGap(44, 44, 44))
+                    .addComponent(lblNombre)
+                    .addComponent(nombre)
+                    .addComponent(buscarCliente1)
+                    .addComponent(tienda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrarActionPerformed
+    PreparedStatement ps = null;
+     ResultSet rs = null;
+    
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        String campo = tienda.getText();
+        String where = "";
+        
+        if(!"".equals(campo)){
+            where = "WHERE Tienda1 = '" + campo + "' OR Tienda2 = '" + campo + "'" ;
+               }
+        
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaTiempo.setModel(model);
+            Conexion con = new Conexion();
+            Connection c = con.obtenerConexion();
+            
+            String sql = "SELECT * FROM TIEMPO ";
+            ps = c.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadC = rsMd.getColumnCount();
+            
+            model.addColumn("Codigo");
+            model.addColumn("Tienda 1");
+            model.addColumn("Tienda 2");
+            model.addColumn("Tiempo En Días");
+       
+            while(rs.next()){
+                
+                Object [] filas = new Object[cantidadC];
+                for(int i = 0; i< cantidadC; i++){
+                  filas[i] = rs.getObject(i + 1);
+            }
+                model.addRow(filas);
+                limpiarCampos();
+            }
+            
+        }catch(SQLException ex) {     
+        }
+    }//GEN-LAST:event_nombreActionPerformed
 
-    private void registrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrar1ActionPerformed
-
-    private void buscarTiempoTiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTiempoTiendaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarTiempoTiendaActionPerformed
-
-    private void tiempoTienda1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tiempoTienda1ItemStateChanged
-        // TODO add your handling code here:
-       // agregarNombresTiendas2(dBConectorTienda.recuperarTiendas());
-    }//GEN-LAST:event_tiempoTienda1ItemStateChanged
-
-    private void tiempoTienda1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tiempoTienda1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tiempoTienda1MouseClicked
+    private void buscarCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCliente1ActionPerformed
+              try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaTiempo.setModel(model);
+            Conexion con = new Conexion();
+            Connection c = con.obtenerConexion();
+            
+            String sql = "SELECT * FROM TIEMPO ";
+            ps = c.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadC = rsMd.getColumnCount();
+            
+            model.addColumn("Codigo");
+            model.addColumn("Tienda 1");
+            model.addColumn("Tienda 2");
+            model.addColumn("Tiempo En Días");
+       
+            while(rs.next()){
+                
+                Object [] filas = new Object[cantidadC];
+                for(int i = 0; i< cantidadC; i++){
+                  filas[i] = rs.getObject(i + 1);
+            }
+                model.addRow(filas);
+                limpiarCampos();
+            }
+            
+        }catch(SQLException ex) {     
+        }
+    }//GEN-LAST:event_buscarCliente1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buscarTiempoTienda;
+    private javax.swing.JButton buscarCliente1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JButton registrar;
-    private javax.swing.JButton registrar1;
-    private javax.swing.JComboBox<String> tiempoTienda1;
+    private javax.swing.JButton nombre;
+    private javax.swing.JTable tablaTiempo;
+    private javax.swing.JTextField tienda;
     // End of variables declaration//GEN-END:variables
 }

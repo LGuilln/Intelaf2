@@ -38,7 +38,6 @@ public class Tienda {
         this.horarioTienda = horarioTienda;
     }
 
-
     public String getNombreTienda() {
         return nombreTienda;
     }
@@ -95,6 +94,4 @@ public class Tienda {
         this.horarioTienda = horarioTienda;
     }
 
-
-    
 }

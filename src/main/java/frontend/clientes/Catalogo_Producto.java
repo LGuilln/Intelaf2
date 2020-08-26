@@ -6,6 +6,13 @@
 package frontend.clientes;
 
 import frontend.empleados.*;
+import conexion_DB.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,8 +25,11 @@ public class Catalogo_Producto extends javax.swing.JInternalFrame {
      */
     public Catalogo_Producto() {
         initComponents();
-        
+
     }
+
+    PreparedStatement ps = null;
+    ResultSet rs = null;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,175 +41,230 @@ public class Catalogo_Producto extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         lblNombre = new javax.swing.JLabel();
-        productoNombre = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         lblCodigo = new javax.swing.JLabel();
-        productoCodigo = new javax.swing.JTextField();
-        registrar = new javax.swing.JButton();
-        registrar1 = new javax.swing.JButton();
-        buscarProducto = new javax.swing.JButton();
+        codigo = new javax.swing.JTextField();
         lblCodigo1 = new javax.swing.JLabel();
-        productoTienda = new javax.swing.JTextField();
+        fabricante = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaProducto = new javax.swing.JTable();
+        buscar = new javax.swing.JButton();
+        buscarCliente1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Catalogo de Productos");
+        setTitle("Lista de Producto para Clientes");
 
         lblNombre.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         lblNombre.setText("Nombre:");
 
-        productoNombre.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        productoNombre.addActionListener(new java.awt.event.ActionListener() {
+        nombre.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                productoNombreActionPerformed(evt);
+                nombreActionPerformed(evt);
             }
         });
 
         lblCodigo.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         lblCodigo.setText("Código:");
 
-        productoCodigo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-
-        registrar.setBackground(new java.awt.Color(102, 255, 0));
-        registrar.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar.setText("Registrar");
-        registrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarActionPerformed(evt);
-            }
-        });
-
-        registrar1.setBackground(new java.awt.Color(102, 255, 0));
-        registrar1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar1.setText("Atras");
-        registrar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrar1ActionPerformed(evt);
-            }
-        });
-
-        buscarProducto.setBackground(new java.awt.Color(102, 255, 0));
-        buscarProducto.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        buscarProducto.setText("Buscar");
-        buscarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarProductoActionPerformed(evt);
-            }
-        });
+        codigo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
 
         lblCodigo1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
-        lblCodigo1.setText("Fabricante:");
+        lblCodigo1.setText("Fabricante");
 
-        productoTienda.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        fabricante.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProducto.setBackground(new java.awt.Color(254, 254, 254));
+        tablaProducto.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
+        tablaProducto.setForeground(new java.awt.Color(1, 1, 1));
+        tablaProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Código", "Nombre", "Fabricante", "Cantidad"
+                "Nombre", "Fabricante", "Código", "Cantidad", "Precion", "Código Tienda", "Descripción", "Garantía"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaProducto);
+
+        buscar.setBackground(new java.awt.Color(102, 255, 0));
+        buscar.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        buscar.setText("Buscar");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
+
+        buscarCliente1.setBackground(new java.awt.Color(102, 255, 0));
+        buscarCliente1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        buscarCliente1.setText("All");
+        buscarCliente1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarCliente1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(registrar)
-                .addGap(284, 284, 284)
-                .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(477, 477, 477))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(lblNombre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(productoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCodigo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(productoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblCodigo1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(productoTienda, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buscarProducto))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(lblNombre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblCodigo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblCodigo1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buscar)
+                .addGap(18, 18, 18)
+                .addComponent(buscarCliente1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(productoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblNombre)
                         .addComponent(lblCodigo)
-                        .addComponent(productoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(productoTienda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(buscarProducto))
+                        .addComponent(buscar)
+                        .addComponent(buscarCliente1))
+                    .addComponent(fabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCodigo1))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registrar)
-                    .addComponent(registrar1))
-                .addContainerGap())
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_registrarActionPerformed
+    }//GEN-LAST:event_nombreActionPerformed
 
-    private void registrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrar1ActionPerformed
+    public void limpiarCampos() {
+        buscar.setText("");
+        codigo.setText("");
+        fabricante.setText("");
+    }
 
-    private void buscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarProductoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscarProductoActionPerformed
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        String campo = buscar.getText();
+        String campo1 = codigo.getText();
+        String campo2 = fabricante.getText();
+        String where = "";
 
-    private void productoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productoNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_productoNombreActionPerformed
+        //query del where para mostrarlos en mis texfields
+        if (!"".equals(campo) || !"".equals(campo1) || !"".equals(campo2)) {
+            where = "WHERE Nombre_Producto = '" + campo + "%' OR Codigo_Producto ='" + campo1 + "' OR Fabricante ='" + campo2 + "%'";
+        }
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaProducto.setModel(model);
+            Conexion con = new Conexion();
+            Connection c = con.obtenerConexion();
+
+            String sql = "SELECT * FROM PRODUCTO " + where;
+            ps = c.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadC = rsMd.getColumnCount();
+
+            model.addColumn("Nombre");
+            model.addColumn("Fabricante");
+            model.addColumn("Código");
+            model.addColumn("Cantidad");
+            model.addColumn("Precio");
+            model.addColumn("Código Tienda");
+            model.addColumn("Descripción");
+            model.addColumn("Garantía");
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadC];
+                for (int i = 0; i < cantidadC; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                model.addRow(filas);
+                limpiarCampos();
+            }
+        } catch (SQLException ex) {
+        }
+    }//GEN-LAST:event_buscarActionPerformed
+
+    private void buscarCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCliente1ActionPerformed
+        try {
+            DefaultTableModel model = new DefaultTableModel();
+            tablaProducto.setModel(model);
+            Conexion con = new Conexion();
+            Connection c = con.obtenerConexion();
+
+            String sql = "SELECT * FROM PRODUCTO ";
+            ps = c.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = rs.getMetaData();
+            int cantidadC = rsMd.getColumnCount();
+
+            model.addColumn("Nombre");
+            model.addColumn("Fabricante");
+            model.addColumn("Código");
+            model.addColumn("Cantidad");
+            model.addColumn("Precio");
+            model.addColumn("Código Tienda");
+            model.addColumn("Descripción");
+            model.addColumn("Garantía");
+            while (rs.next()) {
+
+                Object[] filas = new Object[cantidadC];
+                for (int i = 0; i < cantidadC; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                model.addRow(filas);
+
+            }
+        } catch (SQLException ex) {
+        }
+    }//GEN-LAST:event_buscarCliente1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buscarProducto;
+    private javax.swing.JButton buscar;
+    private javax.swing.JButton buscarCliente1;
+    private javax.swing.JTextField codigo;
+    private javax.swing.JTextField fabricante;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblCodigo1;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JTextField productoCodigo;
-    private javax.swing.JTextField productoNombre;
-    private javax.swing.JTextField productoTienda;
-    private javax.swing.JButton registrar;
-    private javax.swing.JButton registrar1;
+    private javax.swing.JTextField nombre;
+    private javax.swing.JTable tablaProducto;
     // End of variables declaration//GEN-END:variables
 }
