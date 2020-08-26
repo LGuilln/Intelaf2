@@ -5,6 +5,11 @@
  */
 package frontend.empleados;
 
+import backend.Empleado;
+import conexion_DB.Empleado_DB;
+import frontend.Principal_E;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lguilln
@@ -28,68 +33,29 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        empleadolNombre = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        lblCodigoFabricante = new javax.swing.JLabel();
-        empleadoCUI = new javax.swing.JTextField();
-        lblCodigo = new javax.swing.JLabel();
-        empleadoCodigo = new javax.swing.JTextField();
+        registrar = new javax.swing.JButton();
+        registrar1 = new javax.swing.JButton();
         lblPrecio = new javax.swing.JLabel();
         empleadoNIT = new javax.swing.JTextField();
         lblGarantia = new javax.swing.JLabel();
         empleadoTelefono = new javax.swing.JTextField();
         empleadoDireccion = new javax.swing.JTextField();
+        lblNombre = new javax.swing.JLabel();
         lblDescripcion = new javax.swing.JLabel();
-        registrar = new javax.swing.JButton();
-        registrar1 = new javax.swing.JButton();
-        registrarProducto = new javax.swing.JButton();
+        empleadoNombre = new javax.swing.JTextField();
+        lblCodigoFabricante = new javax.swing.JLabel();
+        empleadoDPI = new javax.swing.JTextField();
+        lblCodigo = new javax.swing.JLabel();
         empleadoCorreo = new javax.swing.JTextField();
+        empleadoCodigo = new javax.swing.JTextField();
         lblGarantia1 = new javax.swing.JLabel();
-        lblGarantia2 = new javax.swing.JLabel();
-        empleadoUsuario = new javax.swing.JTextField();
-        lblGarantia3 = new javax.swing.JLabel();
-        empleadoContraseña = new javax.swing.JTextField();
+        registrarProducto = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Registrar Empleados");
-
-        empleadolNombre.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        empleadolNombre.setText("Nombre:");
-
-        txtNombre.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-
-        lblCodigoFabricante.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblCodigoFabricante.setText("CUI:");
-
-        empleadoCUI.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        empleadoCUI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                empleadoCUIActionPerformed(evt);
-            }
-        });
-
-        lblCodigo.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblCodigo.setText("Código:");
-
-        empleadoCodigo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-
-        lblPrecio.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblPrecio.setText("Nit:");
-
-        empleadoNIT.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-
-        lblGarantia.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblGarantia.setText("Telefono:");
-
-        empleadoTelefono.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-
-        empleadoDireccion.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-
-        lblDescripcion.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblDescripcion.setText("Direccion:");
 
         registrar.setBackground(new java.awt.Color(102, 255, 0));
         registrar.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
@@ -109,6 +75,86 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
             }
         });
 
+        lblPrecio.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblPrecio.setText("Nit:");
+
+        empleadoNIT.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        empleadoNIT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                empleadoNITKeyTyped(evt);
+            }
+        });
+
+        lblGarantia.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblGarantia.setText("Telefono:");
+
+        empleadoTelefono.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        empleadoTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                empleadoTelefonoKeyTyped(evt);
+            }
+        });
+
+        empleadoDireccion.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        empleadoDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                empleadoDireccionKeyTyped(evt);
+            }
+        });
+
+        lblNombre.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblNombre.setText("Nombre:");
+
+        lblDescripcion.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblDescripcion.setText("Direccion:");
+
+        empleadoNombre.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        empleadoNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empleadoNombreActionPerformed(evt);
+            }
+        });
+        empleadoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                empleadoNombreKeyTyped(evt);
+            }
+        });
+
+        lblCodigoFabricante.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblCodigoFabricante.setText("CUI:");
+
+        empleadoDPI.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        empleadoDPI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empleadoDPIActionPerformed(evt);
+            }
+        });
+        empleadoDPI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                empleadoDPIKeyTyped(evt);
+            }
+        });
+
+        lblCodigo.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblCodigo.setText("Codigo:");
+
+        empleadoCorreo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        empleadoCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                empleadoCorreoKeyTyped(evt);
+            }
+        });
+
+        empleadoCodigo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        empleadoCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                empleadoCodigoKeyTyped(evt);
+            }
+        });
+
+        lblGarantia1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblGarantia1.setText("Correo Electronico:");
+
         registrarProducto.setBackground(new java.awt.Color(102, 255, 0));
         registrarProducto.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         registrarProducto.setText("Registrar");
@@ -118,41 +164,21 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
             }
         });
 
-        empleadoCorreo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-
-        lblGarantia1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblGarantia1.setText("Correo Electronico:");
-
-        lblGarantia2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblGarantia2.setText("Usuario:");
-
-        empleadoUsuario.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        empleadoUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                empleadoUsuarioActionPerformed(evt);
-            }
-        });
-
-        lblGarantia3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblGarantia3.setText("Contraseña:");
-
-        empleadoContraseña.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(146, Short.MAX_VALUE)
+                .addGap(62, 62, 62)
                 .addComponent(registrar)
                 .addGap(284, 284, 284)
                 .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(309, 309, 309)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(registrarProducto)
-                .addGap(116, 116, 116))
+                .addGap(117, 117, 117))
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -162,55 +188,45 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblCodigoFabricante)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(empleadoCUI))
+                                .addComponent(empleadoDPI))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(empleadolNombre)
+                                .addComponent(lblNombre)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(empleadoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCodigo)
+                                .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(empleadoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblGarantia)
-                                    .addGap(27, 27, 27)
-                                    .addComponent(empleadoTelefono))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblPrecio)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(empleadoNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblGarantia2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDescripcion))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(empleadoCodigo))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(empleadoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50)
-                                .addComponent(lblGarantia3)
+                                .addComponent(lblGarantia)
                                 .addGap(27, 27, 27)
-                                .addComponent(empleadoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(empleadoDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(empleadoTelefono))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblPrecio)
+                                .addGap(18, 18, 18)
+                                .addComponent(empleadoNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDescripcion)
+                        .addGap(18, 18, 18)
+                        .addComponent(empleadoDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 897, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(empleadolNombre)
+                    .addComponent(empleadoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombre)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblCodigo)
                         .addComponent(empleadoCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodigoFabricante)
-                    .addComponent(empleadoCUI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(empleadoDPI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrecio)
                     .addComponent(empleadoNIT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
@@ -223,13 +239,7 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(empleadoDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGarantia3)
-                    .addComponent(empleadoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblGarantia2)
-                    .addComponent(empleadoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registrar)
                     .addComponent(registrar1)
@@ -240,10 +250,6 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void empleadoCUIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadoCUIActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_empleadoCUIActionPerformed
-
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_registrarActionPerformed
@@ -252,36 +258,134 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_registrar1ActionPerformed
 
-    private void registrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProductoActionPerformed
+    private void empleadoNITKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_empleadoNITKeyTyped
+        char caracter = evt.getKeyChar();
+        if ((caracter < 'a' || caracter > 'z') && (caracter < 'A' || caracter > 'Z') && (caracter < '0' || caracter > '9') 
+                && (caracter != '-' || empleadoNIT.getText().contains("-")) ) {
+            evt.consume();
+        }
+        if (empleadoNIT.getText().length() == 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_empleadoNITKeyTyped
+
+    private void empleadoTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_empleadoTelefonoKeyTyped
+        char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+        if (empleadoTelefono.getText().length() == 8) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_empleadoTelefonoKeyTyped
+
+    private void empleadoDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_empleadoDireccionKeyTyped
+        if (empleadoDireccion.getText().length() == 40) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_empleadoDireccionKeyTyped
+
+    private void empleadoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadoNombreActionPerformed
+
+    }//GEN-LAST:event_empleadoNombreActionPerformed
+
+    private void empleadoNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_empleadoNombreKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < 'a' || caracter > 'z') && (caracter < 'A' || caracter > 'Z') && (caracter < ' ' || caracter > ' ') && (caracter < '0' || caracter > '9')) {
+            evt.consume();
+        }
+        if (empleadoNombre.getText().length() == 45) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_empleadoNombreKeyTyped
+
+    private void empleadoDPIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadoDPIActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_empleadoDPIActionPerformed
+
+    private void empleadoDPIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_empleadoDPIKeyTyped
+        char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+        if (empleadoDPI.getText().length() == 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_empleadoDPIKeyTyped
+
+    private void empleadoCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_empleadoCorreoKeyTyped
+        char caracter = evt.getKeyChar();
+        if ((caracter < 'a' || caracter > 'z') && (caracter < 'A' || caracter > 'Z') && (caracter < '0' || caracter > '9') && (caracter != '-') 
+            && (caracter != '_') && (caracter != '.') && (caracter != '@' || empleadoCorreo.getText().contains("@")) ) {
+            evt.consume();
+        }
+        if (empleadoCorreo.getText().length() == 45) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_empleadoCorreoKeyTyped
+
+    private void registrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProductoActionPerformed
+
+        String nombre = empleadoNombre.getText();
+        String codigo = empleadoCodigo.getText();
+        String nit = empleadoNIT.getText();
+        String telefono = empleadoTelefono.getText();
+        String dpi = empleadoDPI.getText();
+        String correo = empleadoCorreo.getText();
+        String direccion = empleadoDireccion.getText();
+        
+                if(empleadoNombre.equals("") ||empleadoCodigo.equals("") || empleadoTelefono.equals("") || empleadoDPI.equals("") || empleadoCorreo.equals("") 
+                        || empleadoDireccion.equals("")){
+            JOptionPane.showMessageDialog(null, "Faltan Campos Obligatorios");
+        }else{
+            Empleado  ingresar = new Empleado(nombre, codigo, nit, telefono, dpi, correo, direccion);
+            conexion_DB.Empleado_DB agregar = new Empleado_DB();
+            if(!agregar.insertarEmpleado(ingresar))
+                {
+                        JOptionPane.showMessageDialog(null, "Ingreso Incorrrecto" + nombre + "Dato no Valido" + codigo +"Dato no Valido" + nit + "Dato no Valido"
+                        + telefono +  "Dato no Valido" + dpi + "Dato no Valido" + correo + "Dato no Valido" + direccion + "Dato no Valido");   
+                }else{
+                JOptionPane.showMessageDialog(null, "Ingresó nuevo Empleado");
+                Principal_E regresar = new Principal_E();
+                regresar.setVisible(true);
+                this.setVisible(false);
+            }
+        }
+       
     }//GEN-LAST:event_registrarProductoActionPerformed
 
-    private void empleadoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadoUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_empleadoUsuarioActionPerformed
+    private void empleadoCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_empleadoCodigoKeyTyped
+                char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+        if (empleadoCodigo.getText().length() == 10) {
+            evt.consume();
+        }
+        
+
+        
+    }//GEN-LAST:event_empleadoCodigoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField empleadoCUI;
     private javax.swing.JTextField empleadoCodigo;
-    private javax.swing.JTextField empleadoContraseña;
     private javax.swing.JTextField empleadoCorreo;
+    private javax.swing.JTextField empleadoDPI;
     private javax.swing.JTextField empleadoDireccion;
     private javax.swing.JTextField empleadoNIT;
+    private javax.swing.JTextField empleadoNombre;
     private javax.swing.JTextField empleadoTelefono;
-    private javax.swing.JTextField empleadoUsuario;
-    private javax.swing.JLabel empleadolNombre;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblCodigoFabricante;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblGarantia;
     private javax.swing.JLabel lblGarantia1;
-    private javax.swing.JLabel lblGarantia2;
-    private javax.swing.JLabel lblGarantia3;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JButton registrar;
     private javax.swing.JButton registrar1;
     private javax.swing.JButton registrarProducto;
-    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

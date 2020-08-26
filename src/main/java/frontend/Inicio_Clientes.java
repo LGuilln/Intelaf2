@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
  *
  * @author lguilln
  */
-public class Inicio extends javax.swing.JFrame {
+public class Inicio_Clientes extends javax.swing.JFrame {
     
     String Icono =  "logo2.png";
     
@@ -22,7 +22,7 @@ public class Inicio extends javax.swing.JFrame {
     /**
      * Creates new form Inicio
      */
-    public Inicio() {
+    public Inicio_Clientes() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.CYAN);
@@ -39,12 +39,9 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         ingresoNombre = new javax.swing.JTextField();
-        ingresoContrasena = new javax.swing.JPasswordField();
         jLabelNombre = new javax.swing.JLabel();
-        jLabelContrasena = new javax.swing.JLabel();
         botonIngresar = new javax.swing.JButton();
         errordatos = new javax.swing.JLabel();
-        campoVacio = new javax.swing.JLabel();
         logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,34 +51,20 @@ public class Inicio extends javax.swing.JFrame {
 
         ingresoNombre.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
-        ingresoContrasena.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        ingresoContrasena.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ingresoContrasenaActionPerformed(evt);
-            }
-        });
-
         jLabelNombre.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
-        jLabelNombre.setText("Usuario:");
-
-        jLabelContrasena.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
-        jLabelContrasena.setText("Contraseña:");
+        jLabelNombre.setText("NIT Cliente:");
 
         botonIngresar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        botonIngresar.setText("Iniciar");
+        botonIngresar.setText("Ingresar");
         botonIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonIngresarActionPerformed(evt);
             }
         });
 
-        errordatos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        errordatos.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         errordatos.setForeground(new java.awt.Color(153, 0, 0));
-        errordatos.setText("Datos Incorrectos");
-
-        campoVacio.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        campoVacio.setForeground(new java.awt.Color(153, 0, 0));
-        campoVacio.setText("Campos Vacios");
+        errordatos.setText("No se Encuentra Código");
 
         logo.setText("Icono");
 
@@ -89,54 +72,37 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(jLabelNombre)
-                        .addGap(55, 55, 55)
-                        .addComponent(ingresoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(jLabelContrasena)
-                        .addGap(8, 8, 8)
-                        .addComponent(ingresoContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(errordatos)
-                        .addGap(89, 89, 89)
-                        .addComponent(campoVacio, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(280, 280, 280)
-                        .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(137, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(247, 247, 247))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(292, 292, 292)
+                        .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addComponent(errordatos))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(jLabelNombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ingresoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabelNombre))
-                    .addComponent(ingresoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabelContrasena))
-                    .addComponent(ingresoContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(errordatos, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoVacio))
-                .addGap(27, 27, 27)
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ingresoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNombre))
+                .addGap(55, 55, 55)
+                .addComponent(errordatos, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(87, Short.MAX_VALUE))
         );
@@ -147,10 +113,6 @@ public class Inicio extends javax.swing.JFrame {
     private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresarActionPerformed
 
     }//GEN-LAST:event_botonIngresarActionPerformed
-
-    private void ingresoContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingresoContrasenaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ingresoContrasenaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,20 +131,23 @@ public class Inicio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inicio_Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inicio_Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inicio_Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inicio_Clientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inicio().setVisible(true);
+                new Inicio_Clientes().setVisible(true);
             }
         });
     }
@@ -198,11 +163,8 @@ public class Inicio extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonIngresar;
-    private javax.swing.JLabel campoVacio;
     private javax.swing.JLabel errordatos;
-    private javax.swing.JPasswordField ingresoContrasena;
     private javax.swing.JTextField ingresoNombre;
-    private javax.swing.JLabel jLabelContrasena;
     private javax.swing.JLabel jLabelNombre;
     public javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables

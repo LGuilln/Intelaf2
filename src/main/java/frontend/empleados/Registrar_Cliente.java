@@ -5,6 +5,11 @@
  */
 package frontend.empleados;
 
+import backend.Cliente;
+import conexion_DB.Cliente_DB;
+import frontend.Principal_E;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lguilln
@@ -16,7 +21,7 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
      */
     public Registrar_Cliente() {
         initComponents();
-        
+
     }
 
     /**
@@ -31,7 +36,7 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
         lblNombre = new javax.swing.JLabel();
         clienteNombre = new javax.swing.JTextField();
         lblCodigoFabricante = new javax.swing.JLabel();
-        txtCodigoFabricante = new javax.swing.JTextField();
+        clienteDPI = new javax.swing.JTextField();
         lblCodigo = new javax.swing.JLabel();
         clienteCredito = new javax.swing.JTextField();
         lblPrecio = new javax.swing.JLabel();
@@ -43,12 +48,8 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
         registrar = new javax.swing.JButton();
         registrar1 = new javax.swing.JButton();
         registrarProducto = new javax.swing.JButton();
-        txtGarantia1 = new javax.swing.JTextField();
+        clienteCorreo = new javax.swing.JTextField();
         lblGarantia1 = new javax.swing.JLabel();
-        lblGarantia2 = new javax.swing.JLabel();
-        clienteUsuario = new javax.swing.JTextField();
-        lblGarantia3 = new javax.swing.JLabel();
-        clienteContra = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -65,14 +66,24 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
                 clienteNombreActionPerformed(evt);
             }
         });
+        clienteNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                clienteNombreKeyTyped(evt);
+            }
+        });
 
         lblCodigoFabricante.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblCodigoFabricante.setText("CUI:");
 
-        txtCodigoFabricante.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-        txtCodigoFabricante.addActionListener(new java.awt.event.ActionListener() {
+        clienteDPI.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        clienteDPI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoFabricanteActionPerformed(evt);
+                clienteDPIActionPerformed(evt);
+            }
+        });
+        clienteDPI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                clienteDPIKeyTyped(evt);
             }
         });
 
@@ -80,18 +91,38 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
         lblCodigo.setText("Credito Compra:");
 
         clienteCredito.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        clienteCredito.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                clienteCreditoKeyTyped(evt);
+            }
+        });
 
         lblPrecio.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblPrecio.setText("Nit:");
 
         clienteNIT.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        clienteNIT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                clienteNITKeyTyped(evt);
+            }
+        });
 
         lblGarantia.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblGarantia.setText("Telefono:");
 
         clienteTelefono.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        clienteTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                clienteTelefonoKeyTyped(evt);
+            }
+        });
 
         clienteDireccion.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        clienteDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                clienteDireccionKeyTyped(evt);
+            }
+        });
 
         lblDescripcion.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblDescripcion.setText("Direccion:");
@@ -123,27 +154,22 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
             }
         });
 
-        txtGarantia1.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        clienteCorreo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        clienteCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                clienteCorreoKeyTyped(evt);
+            }
+        });
 
         lblGarantia1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblGarantia1.setText("Correo Electronico:");
-
-        lblGarantia2.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblGarantia2.setText("Usuario:");
-
-        clienteUsuario.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-
-        lblGarantia3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblGarantia3.setText("Contraseña:");
-
-        clienteContra.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(146, Short.MAX_VALUE)
                 .addComponent(registrar)
                 .addGap(284, 284, 284)
                 .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,56 +177,46 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
                 .addComponent(registrarProducto)
                 .addGap(116, 116, 116))
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblGarantia1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGarantia1))
+                                .addComponent(clienteCorreo))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblCodigoFabricante)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCodigoFabricante))
+                                .addComponent(clienteDPI))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblNombre)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(clienteNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(clienteCredito, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblGarantia)
-                                    .addGap(27, 27, 27)
-                                    .addComponent(clienteTelefono))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblPrecio)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(clienteNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblGarantia2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDescripcion))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(clienteCredito))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(clienteUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50)
-                                .addComponent(lblGarantia3)
+                                .addComponent(lblGarantia)
                                 .addGap(27, 27, 27)
-                                .addComponent(clienteContra, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(clienteDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(88, Short.MAX_VALUE))
+                                .addComponent(clienteTelefono))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblPrecio)
+                                .addGap(18, 18, 18)
+                                .addComponent(clienteNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDescripcion)
+                        .addGap(18, 18, 18)
+                        .addComponent(clienteDireccion)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(clienteNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNombre)
@@ -210,7 +226,7 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodigoFabricante)
-                    .addComponent(txtCodigoFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clienteDPI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrecio)
                     .addComponent(clienteNIT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
@@ -218,18 +234,12 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
                     .addComponent(lblGarantia)
                     .addComponent(clienteTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblGarantia1)
-                    .addComponent(txtGarantia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(clienteCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clienteDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblGarantia3)
-                    .addComponent(clienteContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblGarantia2)
-                    .addComponent(clienteUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registrar)
                     .addComponent(registrar1)
@@ -240,9 +250,9 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtCodigoFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoFabricanteActionPerformed
+    private void clienteDPIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteDPIActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoFabricanteActionPerformed
+    }//GEN-LAST:event_clienteDPIActionPerformed
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
@@ -253,35 +263,127 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_registrar1ActionPerformed
 
     private void registrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProductoActionPerformed
+
+        String nombre = clienteNombre.getText();
+        String nit = clienteNIT.getText();
+        String telefono = clienteTelefono.getText();
+        Double creditoCompra = 0.0;
+        if (!clienteCredito.getText().equals("")) {
+            creditoCompra = Double.parseDouble(clienteCredito.getText());
+        }
+        String dpi = clienteDPI.getText();
+        String correo = clienteCorreo.getText();
+        String direccion = clienteDireccion.getText();
+
+        if (nombre.equals("") || nit.equals("") || telefono.equals("")) {
+            JOptionPane.showMessageDialog(null, "Faltan Campos Obligatorios");
+        } else {
+            Cliente ingresar = new Cliente(nombre, nit, telefono, creditoCompra, dpi, correo, direccion);
+            conexion_DB.Cliente_DB agregar = new Cliente_DB();
+            if (!agregar.insertarCliente(ingresar)) {
+                JOptionPane.showMessageDialog(null, "Ingreso Incorrrecto" + nombre + "Dato no Valido" + nit + "Dato no Valido"
+                        + telefono + "DDato no Valido" + creditoCompra + "Dato no Valido" + dpi + "Dato no Valido" + correo + "Dato no Valido" + direccion + "Dato no Valido");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingresó nuevo Cliente");
+                Principal_E regresar = new Principal_E();
+                regresar.setVisible(true);
+                this.setVisible(false);
+            }
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_registrarProductoActionPerformed
 
     private void clienteNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteNombreActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_clienteNombreActionPerformed
+
+    private void clienteTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clienteTelefonoKeyTyped
+        char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+        if (clienteTelefono.getText().length() == 8) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_clienteTelefonoKeyTyped
+
+    private void clienteDPIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clienteDPIKeyTyped
+        char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+        if (clienteDPI.getText().length() == 20) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_clienteDPIKeyTyped
+
+    private void clienteNITKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clienteNITKeyTyped
+        char caracter = evt.getKeyChar();
+        if ((caracter < 'a' || caracter > 'z') && (caracter < 'A' || caracter > 'Z') && (caracter < '0' || caracter > '9') && (caracter != '-' || clienteNIT.getText().contains("-")) ) {
+            evt.consume();
+        }
+        if (clienteNIT.getText().length() == 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_clienteNITKeyTyped
+
+    private void clienteNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clienteNombreKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < 'a' || caracter > 'z') && (caracter < 'A' || caracter > 'Z') && (caracter < ' ' || caracter > ' ') && (caracter < '0' || caracter > '9')) {
+            evt.consume();
+        }
+        if (clienteNombre.getText().length() == 45) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_clienteNombreKeyTyped
+
+    private void clienteDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clienteDireccionKeyTyped
+        if (clienteDireccion.getText().length() == 40) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_clienteDireccionKeyTyped
+
+    private void clienteCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clienteCorreoKeyTyped
+    char caracter = evt.getKeyChar();
+        if ((caracter < 'a' || caracter > 'z') && (caracter < 'A' || caracter > 'Z') && (caracter < '0' || caracter > '9') && (caracter != '-') && (caracter != '_') && (caracter != '.') && (caracter != '@' || clienteCorreo.getText().contains("@")) ) {
+            evt.consume();
+        }
+        if (clienteCorreo.getText().length() == 45) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_clienteCorreoKeyTyped
+
+    private void clienteCreditoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clienteCreditoKeyTyped
+         char caracter = evt.getKeyChar();
+        if ((caracter < '0' || caracter > '9') && (caracter != '.' || clienteCredito.getText().contains("."))) {
+            evt.consume();
+        }
+        
+   
+    }//GEN-LAST:event_clienteCreditoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField clienteContra;
+    private javax.swing.JTextField clienteCorreo;
     private javax.swing.JTextField clienteCredito;
+    private javax.swing.JTextField clienteDPI;
     private javax.swing.JTextField clienteDireccion;
     private javax.swing.JTextField clienteNIT;
     private javax.swing.JTextField clienteNombre;
     private javax.swing.JTextField clienteTelefono;
-    private javax.swing.JTextField clienteUsuario;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblCodigoFabricante;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblGarantia;
     private javax.swing.JLabel lblGarantia1;
-    private javax.swing.JLabel lblGarantia2;
-    private javax.swing.JLabel lblGarantia3;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JButton registrar;
     private javax.swing.JButton registrar1;
     private javax.swing.JButton registrarProducto;
-    private javax.swing.JTextField txtCodigoFabricante;
-    private javax.swing.JTextField txtGarantia1;
     // End of variables declaration//GEN-END:variables
 }
