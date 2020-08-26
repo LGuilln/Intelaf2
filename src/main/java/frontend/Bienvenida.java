@@ -5,6 +5,8 @@
  */
 package frontend;
 
+import backend.Tienda;
+import conexion_DB.Tienda_DB;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -63,11 +65,11 @@ public class Bienvenida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(291, 291, 291)
-                        .addComponent(botonPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(180, 180, 180)
-                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(116, 116, 116)
+                        .addComponent(botonPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(189, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -75,9 +77,9 @@ public class Bienvenida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addGap(54, 54, 54)
                 .addComponent(botonPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         pack();
@@ -85,7 +87,7 @@ public class Bienvenida extends javax.swing.JFrame {
 
     private void botonPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPrincipalActionPerformed
         this.setVisible(false);
-        new Inicio().setVisible(true);
+        new Inicio_Empleados().setVisible(true);
         
     }//GEN-LAST:event_botonPrincipalActionPerformed
 
@@ -132,6 +134,8 @@ public class Bienvenida extends javax.swing.JFrame {
         logo.setIcon(imageIconFinal);
     }
     
+    
+      //para ver si existe mis datos de empleado
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

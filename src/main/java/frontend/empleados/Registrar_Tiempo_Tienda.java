@@ -31,12 +31,12 @@ public class Registrar_Tiempo_Tienda extends javax.swing.JInternalFrame {
         lblNombre = new javax.swing.JLabel();
         registrar = new javax.swing.JButton();
         registrar1 = new javax.swing.JButton();
-        registrarProducto = new javax.swing.JButton();
         lblNombre1 = new javax.swing.JLabel();
-        tiempoDias = new javax.swing.JTextField();
         lblPrecio1 = new javax.swing.JLabel();
-        tiempoTienda1 = new javax.swing.JComboBox<>();
-        tiempoTienda2 = new javax.swing.JComboBox<>();
+        tiendaCodigo2 = new javax.swing.JTextField();
+        tiendaCodigo1 = new javax.swing.JTextField();
+        tiendaTiempo = new javax.swing.JTextField();
+        registrarProducto = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -65,6 +65,33 @@ public class Registrar_Tiempo_Tienda extends javax.swing.JInternalFrame {
             }
         });
 
+        lblNombre1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblNombre1.setText("Código Tienda 2:");
+
+        lblPrecio1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblPrecio1.setText("Tiempo (Dias)");
+
+        tiendaCodigo2.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        tiendaCodigo2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tiendaCodigo2KeyTyped(evt);
+            }
+        });
+
+        tiendaCodigo1.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        tiendaCodigo1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tiendaCodigo1KeyTyped(evt);
+            }
+        });
+
+        tiendaTiempo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        tiendaTiempo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tiendaTiempoKeyTyped(evt);
+            }
+        });
+
         registrarProducto.setBackground(new java.awt.Color(102, 255, 0));
         registrarProducto.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         registrarProducto.setText("Registrar");
@@ -74,73 +101,47 @@ public class Registrar_Tiempo_Tienda extends javax.swing.JInternalFrame {
             }
         });
 
-        lblNombre1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblNombre1.setText("Código Tienda 2:");
-
-        tiempoDias.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
-
-        lblPrecio1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        lblPrecio1.setText("Tiempo (Dias)");
-
-        tiempoTienda1.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-        tiempoTienda1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                tiempoTienda1ItemStateChanged(evt);
-            }
-        });
-        tiempoTienda1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tiempoTienda1MouseClicked(evt);
-            }
-        });
-
-        tiempoTienda2.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(128, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblPrecio1)
-                            .addGap(18, 18, 18)
-                            .addComponent(tiempoDias, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblNombre1)
-                                .addComponent(lblNombre))
-                            .addGap(34, 34, 34)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tiempoTienda1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tiempoTienda2, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(registrar)
-                        .addGap(284, 284, 284)
-                        .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(309, 309, 309)
-                        .addComponent(registrarProducto)))
-                .addGap(116, 116, 116))
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(registrar)
+                .addGap(284, 284, 284)
+                .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(296, 296, 296)
+                .addComponent(registrarProducto)
+                .addGap(129, 129, 129))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(251, 251, 251)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombre1)
+                    .addComponent(lblPrecio1)
+                    .addComponent(lblNombre))
+                .addGap(69, 69, 69)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tiendaCodigo1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(tiendaCodigo2)
+                    .addComponent(tiendaTiempo))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(81, 81, 81)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNombre)
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNombre1)
-                            .addComponent(tiempoTienda2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(tiempoTienda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(89, 89, 89)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombre)
+                    .addComponent(tiendaCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombre1)
+                    .addComponent(tiendaCodigo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(87, 87, 87)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblPrecio1)
-                    .addComponent(tiempoDias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                    .addComponent(tiendaTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(registrar)
                     .addComponent(registrar1)
@@ -159,20 +160,65 @@ public class Registrar_Tiempo_Tienda extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_registrar1ActionPerformed
 
+    private void tiendaCodigo2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tiendaCodigo2KeyTyped
+        char caracter = evt.getKeyChar();
+        if ((caracter < 'A' || caracter > 'Z') && (caracter < '0' || caracter > '9') && (caracter != '-' || tiendaCodigo2.getText().contains("-")) ) {
+            evt.consume();
+        }
+        if (tiendaCodigo2.getText().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tiendaCodigo2KeyTyped
+
+    private void tiendaCodigo1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tiendaCodigo1KeyTyped
+ char caracter = evt.getKeyChar();
+        if ((caracter < 'A' || caracter > 'Z') && (caracter < '0' || caracter > '9') && (caracter != '-' || tiendaCodigo1.getText().contains("-")) ) {
+            evt.consume();
+        }
+        if (tiendaCodigo1.getText().length() == 10) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tiendaCodigo1KeyTyped
+
+    private void tiendaTiempoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tiendaTiempoKeyTyped
+        char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+        if (tiendaTiempo.getText().length() == 8) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_tiendaTiempoKeyTyped
+
     private void registrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProductoActionPerformed
-        // TODO add your handling code here:
+/*
+        String nombre = tiendaNombre.getText();
+        String codigo = tiendaCodigo.getText();
+        String telefono1 = tiendaTelefono1.getText();
+        String telefono2 = tiendaTelefono2.getText();
+        String horario = tiendaHorario.getText();
+        String correo = tiendaCorreo.getText();
+        String direccion = tiendaDireccion.getText();
+
+        if(tiendaNombre.equals("") ||tiendaCodigo.equals("") || tiendaTelefono1.equals("") || tiendaDireccion.equals("")){
+            JOptionPane.showMessageDialog(null, "Faltan Campos Obligatorios");
+        }else{
+            Tienda  ingresar = new Tienda(nombre, codigo, telefono1, telefono2, horario, correo, direccion);
+            conexion_DB.Tienda_DB agregar = new Tienda_DB();
+            if(!agregar.insertarTienda(ingresar))
+            {
+                JOptionPane.showMessageDialog(null, "Ingreso Incorrrecto" + nombre + "Dato no Valido" + codigo +"Dato no Valido" + telefono1 + "Dato no Valido"
+                    + telefono2 +  "Dato no Valido" + horario + "Dato no Valido" + correo + "Dato no Valido" + direccion + "Dato no Valido");
+            }else{
+                JOptionPane.showMessageDialog(null, "Ingresó nuevo Tienda");
+                Principal_E regresar = new Principal_E();
+                regresar.setVisible(true);
+                this.setVisible(false);
+            }
+        }
     }//GEN-LAST:event_registrarProductoActionPerformed
 
-    private void tiempoTienda1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tiempoTienda1ItemStateChanged
-        // TODO add your handling code here:
-       // agregarNombresTiendas2(dBConectorTienda.recuperarTiendas());
-    }//GEN-LAST:event_tiempoTienda1ItemStateChanged
-
-    private void tiempoTienda1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tiempoTienda1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tiempoTienda1MouseClicked
-
-
+*/}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
@@ -180,8 +226,8 @@ public class Registrar_Tiempo_Tienda extends javax.swing.JInternalFrame {
     private javax.swing.JButton registrar;
     private javax.swing.JButton registrar1;
     private javax.swing.JButton registrarProducto;
-    private javax.swing.JTextField tiempoDias;
-    private javax.swing.JComboBox<String> tiempoTienda1;
-    private javax.swing.JComboBox<String> tiempoTienda2;
+    private javax.swing.JTextField tiendaCodigo1;
+    private javax.swing.JTextField tiendaCodigo2;
+    private javax.swing.JTextField tiendaTiempo;
     // End of variables declaration//GEN-END:variables
 }

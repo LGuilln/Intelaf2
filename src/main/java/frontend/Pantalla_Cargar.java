@@ -5,8 +5,14 @@
  */
 package frontend;
 
+import Archivo_Entrada.Archivo_Entrada;
 import java.awt.Color;
+import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -19,7 +25,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Pantalla_Cargar extends javax.swing.JFrame {
  private File file;
  private String rutaArchivo;
-    
+ 
+ 
+ String Icono =  "logo2.png";
     
     /**
      * Creates new form Inicio
@@ -28,6 +36,7 @@ public class Pantalla_Cargar extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.getContentPane().setBackground(Color.CYAN);
+        cargarIcono(Icono);
     }
 
     /**
@@ -43,7 +52,8 @@ public class Pantalla_Cargar extends javax.swing.JFrame {
         botonBuscar = new javax.swing.JButton();
         botonAtras = new javax.swing.JButton();
         lblMsgError = new java.awt.Label();
-        txtDir = new java.awt.TextField();
+        pathArchivo = new java.awt.TextField();
+        logo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sesion");
@@ -77,43 +87,63 @@ public class Pantalla_Cargar extends javax.swing.JFrame {
             }
         });
 
+        lblMsgError.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        lblMsgError.setForeground(new java.awt.Color(255, 0, 0));
+
+        pathArchivo.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        pathArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pathArchivoActionPerformed(evt);
+            }
+        });
+
+        logo.setText("Icono");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(botonCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)))
+                .addGap(281, 281, 281))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(botonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblMsgError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDir, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))))
+                        .addComponent(pathArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(botonAtras))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(lblMsgError, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(300, 300, 300)
+                .addGap(48, 48, 48)
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtDir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pathArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8)))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblMsgError, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
-                .addComponent(botonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
+                .addComponent(botonCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(lblMsgError, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(botonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         getAccessibleContext().setAccessibleName("Menú Principal");
@@ -122,30 +152,34 @@ public class Pantalla_Cargar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCargarActionPerformed
-        // TODO add your handling code here:
+    if(file==null){
+            lblMsgError.setText("Este Archivo No Existe");//si el archivo es null, se muestra el mensaje de error
+        }else{
+            if(file.isFile()){
+                Archivo_Entrada lector = new Archivo_Entrada();
+                try {
+                    lector.leerArchivo(file);
+                } catch (IOException ex) {
+                    Logger.getLogger(Pantalla_Cargar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                lblMsgError.setText("Elija un Archivo .txt");
+            }
+        }    // TODO add your handling code here:
     }//GEN-LAST:event_botonCargarActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-        
-        JFileChooser buscador = new JFileChooser();  // Agregamos un JFileChooser para buscar el archivo que queremos leer  
-        //buscador.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        FileFilter filter = new FileNameExtensionFilter("*.txt", "txt", "text");
-        buscador.setFileFilter(filter);
-        
-        buscador.showOpenDialog(this);
-        file = buscador.getSelectedFile(); //El archivo seleccionado es el que agregamos a nuestra variable de tipo file
-        if(file == null){//si el archivo es nulo
-            rutaArchivo="";        // entonces la dirrecion sera vacia
-        }else{
-        rutaArchivo = buscador.getSelectedFile().getAbsolutePath();  //si no es nulo entonces le asignaremos el path a nuestra var
-        }
-      //  return rutaArchivo;//retornamos el path
-        // TODO add your handling code here:
+    pathArchivo.setText(buscarArchivoTxt());
     }//GEN-LAST:event_botonBuscarActionPerformed
 
     private void botonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasActionPerformed
-        // TODO add your handling code here:
+     this.setVisible(false);
+     new Principal_E().setVisible(true);
     }//GEN-LAST:event_botonAtrasActionPerformed
+
+    private void pathArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pathArchivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pathArchivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,12 +218,38 @@ public class Pantalla_Cargar extends javax.swing.JFrame {
             }
         });
     }
+    
+     private String buscarArchivoTxt(){
+        JFileChooser buscador = new JFileChooser();  // Agregamos un JFileChooser para buscar el archivo que queremos leer  
+        //buscador.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileFilter filter = new FileNameExtensionFilter("*.txt", "txt", "text");
+        buscador.setFileFilter(filter);
+        
+        buscador.showOpenDialog(this);
+        file = buscador.getSelectedFile(); //El archivo seleccionado es el que agregamos a nuestra variable de tipo file
+        if(file == null){//si el archivo es nulo
+            rutaArchivo="";        // entonces la dirrecion sera vacia
+        }else{
+        rutaArchivo = buscador.getSelectedFile().getAbsolutePath();  //si no es nulo entonces le asignaremos el path a nuestra var
+        }
+        return rutaArchivo;//retornamos el path
+    }
+    
+    
+     public void cargarIcono(String NombreImagen)
+    {
+        ImageIcon imageIcon = new ImageIcon(getClass().getClassLoader().getResource(NombreImagen));
+        ImageIcon imageIconFinal = new ImageIcon(imageIcon.getImage().getScaledInstance(logo.getWidth(), logo.getHeight(), Image.SCALE_DEFAULT));
+        logo.setIcon(imageIconFinal);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAtras;
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonCargar;
     private java.awt.Label lblMsgError;
-    private java.awt.TextField txtDir;
+    public javax.swing.JLabel logo;
+    private java.awt.TextField pathArchivo;
     // End of variables declaration//GEN-END:variables
 }

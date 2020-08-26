@@ -6,7 +6,11 @@
 package backend;
 
 import conexion_DB.Conexion;
-import conexion_DB.Conexion12;
+import frontend.Bienvenida;
+import frontend.Inicio_Empleados;
+import frontend.Pantalla_Cargar;
+import java.sql.SQLException;
+
 
 /**
  *
@@ -14,21 +18,25 @@ import conexion_DB.Conexion12;
  */
 public class Main {
     
-    public static void main(String[] args) {
-               
-       //new Inicio().setVisible(true);
+    public static void main(String[] args) throws SQLException{
         
-        Conexion cb1= new Conexion();
+       Inicio_Empleados inicio = new Inicio_Empleados();
+       Empleado tienda =inicio.verificarEstado_DB();
+       
+       
+        if(tienda == null){
+       Pantalla_Cargar archivoEntrada = new Pantalla_Cargar();
+       archivoEntrada.setVisible(true);        
+        
+            
+        }else{
+            Bienvenida iniciar = new Bienvenida();
+            iniciar.setVisible(true);
+        }
+        
+ Conexion cb1= new Conexion();
         cb1.obtenerConexion(); 
-        
-        
-        //Instanciamos y mostramos el menu principal
-        //MenuPrincipal mp = new MenuPrincipal();
-        //mp.show();
+
     }
-    
-    private void setVisible(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+
 }

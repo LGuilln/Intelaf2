@@ -7,7 +7,9 @@ package conexion_DB;
 
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,9 +21,10 @@ public class Conexion {
  
     private Connection conexion = null;
     private final String driver = "com.mysql.jdbc.Driver";
-    private final String user = "LGuilln";
+    private final String user = "root";
     private final String password = "12345";
-    private final String url = "jdbc:mysql://localhost:3306/BASE_INTELAF";
+    private final String url = "jdbc:mysql://localhost:3306/B1";
+    private final String segura = "jdbc:mysql://host:port/database?useSSL=false";
     
 
         public Connection obtenerConexion() {
@@ -38,6 +41,17 @@ public class Conexion {
         return conexion;
     }
 
+        public ResultSet getTodo(String consulta) {
+        Connection conexion = obtenerConexion();
+        Statement st;
+        ResultSet datos = null;
+        try {
+            st = conexion.createStatement();
+            datos = st.executeQuery(consulta);
+        } catch (Exception e) {
+        }
+        return datos;
+    }
     
     //metodo encargado de salir de la base de datos
     public void desconectarDB(){
@@ -47,9 +61,8 @@ public class Conexion {
         }
     }
 
-    void Conexion_DB() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+        
     
     
     
