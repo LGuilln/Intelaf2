@@ -15,15 +15,14 @@ public class Tiempo {
     private String tienda2;
     private int tiempoDias;
 
-    public Tiempo( String tienda1, String tienda2, int tiempoDias) {
-   
+    public Tiempo(String tienda1, String tienda2, int tiempoDias) {
+
         this.tienda1 = tienda1;
         this.tienda2 = tienda2;
         this.tiempoDias = tiempoDias;
 
     }
 
-   
     public String getTienda1() {
         return tienda1;
     }
@@ -55,5 +54,4 @@ public class Tiempo {
     public void setCodigoTiempo(int codigoTiempo) {
         this.codigoTiempo = codigoTiempo;
     }*/
-
 }

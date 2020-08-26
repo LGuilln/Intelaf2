@@ -12,7 +12,6 @@ import frontend.empleados.Modificar_Tiempo_Tienda;
 import frontend.empleados.Registrar_Cliente;
 import frontend.empleados.Registrar_Empleado;
 import frontend.empleados.Registrar_Producto;
-import frontend.empleados.Registrar_Producto_Tienda;
 import frontend.empleados.Registrar_Tiempo_Tienda;
 import frontend.empleados.Registrar_Tienda;
 import frontend.empleados.Ver_Cliente;
@@ -417,12 +416,12 @@ public class Principal_E extends javax.swing.JFrame {
 
     private void registroInventarioProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroInventarioProductoActionPerformed
       
-      Registrar_Producto_Tienda registrarProductoTienda = new Registrar_Producto_Tienda();
+     /* Registrar_Producto_Tienda registrarProductoTienda = new Registrar_Producto_Tienda();
       escritorio.removeAll();
       escritorio.updateUI();
       escritorio.add(registrarProductoTienda);
       registrarProductoTienda.show();
-      
+      */
       
     }//GEN-LAST:event_registroInventarioProductoActionPerformed
 

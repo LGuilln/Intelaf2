@@ -44,13 +44,14 @@ public class Empleado_DB extends Conexion{
         }
     
          }
+
     
     
     public Empleado obtenerEmpleado(){
          Empleado empleado = null;
          Conexion conexion = new Conexion();
         
-        ResultSet rs = conexion.getTodo("SELECT * FROM TIENDA LIMIT 1");
+        ResultSet rs = conexion.getTodo("SELECT * EMPLEADO WHERE Codigo_Empleado = ?");
         try{
             while (rs.next()){
                 empleado = new Empleado(rs.getString("Nombre_Empleado"), rs.getString("Codigo_Empleado"), rs.getString("Telefono"), rs.getString("NIT_Empleado"));
@@ -60,5 +61,8 @@ public class Empleado_DB extends Conexion{
         }
               return empleado;  
      }
+
+
+
     
 }

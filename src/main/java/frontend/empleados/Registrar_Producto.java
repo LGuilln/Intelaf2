@@ -5,6 +5,13 @@
  */
 package frontend.empleados;
 
+import backend.Empleado;
+import backend.Producto;
+import conexion_DB.Empleado_DB;
+import conexion_DB.Producto_DB;
+import frontend.Principal_E;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lguilln
@@ -40,15 +47,13 @@ public class Registrar_Producto extends javax.swing.JInternalFrame {
         productoGarantia = new javax.swing.JTextField();
         productoDescripcion = new javax.swing.JTextField();
         lblDescripcion = new javax.swing.JLabel();
-        registrar = new javax.swing.JButton();
-        registrar1 = new javax.swing.JButton();
-        registrarProducto = new javax.swing.JButton();
         lblCodigoFabricante1 = new javax.swing.JLabel();
-        productoTiendaCodigo = new javax.swing.JComboBox<>();
         productoTiendaC = new javax.swing.JTextField();
         lblPrecio1 = new javax.swing.JLabel();
         productoTiendaI = new javax.swing.JTextField();
         inentario = new javax.swing.JLabel();
+        productoNombre1 = new javax.swing.JTextField();
+        registrarProducto1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -60,6 +65,11 @@ public class Registrar_Producto extends javax.swing.JInternalFrame {
         lblNombre.setText("Nombre:");
 
         productoNombre.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        productoNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                productoNombreKeyTyped(evt);
+            }
+        });
 
         lblCodigoFabricante.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblCodigoFabricante.setText("Código Fabricante:");
@@ -70,16 +80,31 @@ public class Registrar_Producto extends javax.swing.JInternalFrame {
                 productoCodigoFabricanteActionPerformed(evt);
             }
         });
+        productoCodigoFabricante.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                productoCodigoFabricanteKeyTyped(evt);
+            }
+        });
 
         lblCodigo.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblCodigo.setText("Código:");
 
         productoCodigo.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        productoCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                productoCodigoKeyTyped(evt);
+            }
+        });
 
         lblPrecio.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblPrecio.setText("Precio:   ");
 
         productoPrecio.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        productoPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                productoPrecioKeyTyped(evt);
+            }
+        });
 
         lblGarantia.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblGarantia.setText("Garantía (M):");
@@ -90,45 +115,26 @@ public class Registrar_Producto extends javax.swing.JInternalFrame {
                 productoGarantiaActionPerformed(evt);
             }
         });
+        productoGarantia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                productoGarantiaKeyTyped(evt);
+            }
+        });
 
         productoDescripcion.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
 
         lblDescripcion.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblDescripcion.setText("Descripcion:");
 
-        registrar.setBackground(new java.awt.Color(102, 255, 0));
-        registrar.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar.setText("Registrar");
-        registrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarActionPerformed(evt);
-            }
-        });
-
-        registrar1.setBackground(new java.awt.Color(102, 255, 0));
-        registrar1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar1.setText("Atras");
-        registrar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrar1ActionPerformed(evt);
-            }
-        });
-
-        registrarProducto.setBackground(new java.awt.Color(102, 255, 0));
-        registrarProducto.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrarProducto.setText("Registrar");
-        registrarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarProductoActionPerformed(evt);
-            }
-        });
-
         lblCodigoFabricante1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblCodigoFabricante1.setText("Código Tienda:");
 
-        productoTiendaCodigo.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-
         productoTiendaC.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        productoTiendaC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                productoTiendaCKeyTyped(evt);
+            }
+        });
 
         lblPrecio1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblPrecio1.setText("Cantidad a Ingresar:");
@@ -139,71 +145,85 @@ public class Registrar_Producto extends javax.swing.JInternalFrame {
                 productoTiendaIActionPerformed(evt);
             }
         });
+        productoTiendaI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                productoTiendaIKeyTyped(evt);
+            }
+        });
 
         inentario.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         inentario.setText("Inventario:");
+
+        productoNombre1.setFont(new java.awt.Font("Dialog", 0, 20)); // NOI18N
+        productoNombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                productoNombre1KeyTyped(evt);
+            }
+        });
+
+        registrarProducto1.setBackground(new java.awt.Color(102, 255, 0));
+        registrarProducto1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        registrarProducto1.setText("Registrar");
+        registrarProducto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarProducto1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(75, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(registrar)
-                        .addGap(284, 284, 284)
-                        .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(309, 309, 309)
-                        .addComponent(registrarProducto)
-                        .addGap(116, 116, 116))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblNombre)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(productoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblCodigoFabricante)
-                                            .addComponent(lblCodigoFabricante1)
-                                            .addComponent(lblPrecio1))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(productoTiendaCodigo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(productoCodigoFabricante))))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(64, 64, 64)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblCodigo)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(productoCodigo))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblPrecio)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(productoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(lblGarantia)
-                                                .addGap(27, 27, 27)
-                                                .addComponent(productoGarantia))))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(productoTiendaI, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblDescripcion)
-                                .addGap(50, 50, 50)
-                                .addComponent(productoDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 846, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(67, 67, 67))))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(328, 328, 328)
-                .addComponent(productoTiendaC, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(productoTiendaC, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(productoNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67)
                 .addComponent(inentario)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(75, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(registrarProducto1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblNombre)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(productoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblCodigoFabricante)
+                                        .addComponent(lblCodigoFabricante1)
+                                        .addComponent(lblPrecio1))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(productoCodigoFabricante)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(64, 64, 64)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblCodigo)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(productoCodigo))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblPrecio)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(productoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(lblGarantia)
+                                            .addGap(27, 27, 27)
+                                            .addComponent(productoGarantia))))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(productoTiendaI, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblDescripcion)
+                            .addGap(50, 50, 50)
+                            .addComponent(productoDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 846, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(67, 67, 67))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,13 +241,13 @@ public class Registrar_Producto extends javax.swing.JInternalFrame {
                     .addComponent(productoCodigoFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrecio)
                     .addComponent(productoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblGarantia)
                     .addComponent(productoGarantia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCodigoFabricante1)
-                    .addComponent(productoTiendaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                    .addComponent(productoNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPrecio1)
                     .addComponent(productoTiendaC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,12 +259,9 @@ public class Registrar_Producto extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblDescripcion)
                         .addGap(52, 52, 52)))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registrar)
-                    .addComponent(registrar1)
-                    .addComponent(registrarProducto))
-                .addGap(44, 44, 44))
+                .addGap(40, 40, 40)
+                .addComponent(registrarProducto1)
+                .addGap(38, 38, 38))
         );
 
         pack();
@@ -254,18 +271,6 @@ public class Registrar_Producto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_productoCodigoFabricanteActionPerformed
 
-    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrarActionPerformed
-
-    private void registrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrar1ActionPerformed
-
-    private void registrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProductoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrarProductoActionPerformed
-
     private void productoGarantiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productoGarantiaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_productoGarantiaActionPerformed
@@ -273,6 +278,120 @@ public class Registrar_Producto extends javax.swing.JInternalFrame {
     private void productoTiendaIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productoTiendaIActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_productoTiendaIActionPerformed
+
+    private void productoNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productoNombreKeyTyped
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productoNombreKeyTyped
+
+    private void productoCodigoFabricanteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productoCodigoFabricanteKeyTyped
+         char caracter = evt.getKeyChar();
+
+        if ((caracter < 'a' || caracter > 'z') && (caracter < 'A' || caracter > 'Z') && (caracter < ' ' || caracter > ' ') && (caracter < '0' || caracter > '9')) {
+            evt.consume();
+        }
+        if (productoCodigoFabricante.getText().length() == 45) {
+            evt.consume();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productoCodigoFabricanteKeyTyped
+
+    private void productoNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productoNombre1KeyTyped
+                        char caracter = evt.getKeyChar();
+        if ((caracter < 'a' || caracter > 'z') && (caracter < 'A' || caracter > 'Z') && (caracter < '0' || caracter > '9') && (caracter != '-' || productoNombre1.getText().contains("-"))) {
+            evt.consume();
+        }
+        if (productoNombre1.getText().length() == 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_productoNombre1KeyTyped
+
+    private void productoPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productoPrecioKeyTyped
+                        char caracter = evt.getKeyChar();
+        if ((caracter < '0' || caracter > '9') && (caracter != '.' || productoPrecio.getText().contains("."))) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_productoPrecioKeyTyped
+
+    private void productoGarantiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productoGarantiaKeyTyped
+                      char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+        if (productoGarantia.getText().length() == 8) {
+            evt.consume();
+        }
+    
+    }//GEN-LAST:event_productoGarantiaKeyTyped
+
+    private void productoTiendaIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productoTiendaIKeyTyped
+                      char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+        if (productoTiendaI.getText().length() == 8) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_productoTiendaIKeyTyped
+
+    private void productoTiendaCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productoTiendaCKeyTyped
+                      char caracter = evt.getKeyChar();
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        }
+        if (productoTiendaC.getText().length() == 8) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_productoTiendaCKeyTyped
+
+    private void productoCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productoCodigoKeyTyped
+                                char caracter = evt.getKeyChar();
+        if ((caracter < 'a' || caracter > 'z') && (caracter < 'A' || caracter > 'Z') && (caracter < '0' || caracter > '9') && (caracter != '-' || productoCodigo.getText().contains("-"))) {
+            evt.consume();
+        }
+        if (productoCodigo.getText().length() == 13) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_productoCodigoKeyTyped
+
+    private void registrarProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProducto1ActionPerformed
+
+       String nombre = productoNombre.getText();
+        String fabricante = productoCodigoFabricante.getText();
+        String codigo = productoCodigo.getText();
+        int cantidad = 0;
+        Double precio = 0.0;
+        String idTienda = productoNombre1.getText();
+        String descripcion = productoDescripcion.getText();
+        int garantia = 0;
+        if(!productoTiendaC.getText().equals("")){
+            cantidad = Integer.parseInt(productoTiendaC.getText());
+        }
+        if(!productoPrecio.getText().equals("")){
+            precio = Double.parseDouble(productoPrecio.getText());
+        }
+         if(!productoGarantia.getText().equals("")){
+            garantia = Integer.parseInt(productoGarantia.getText());
+        }
+      
+        
+        if(nombre.equals("") || fabricante.equals("") || codigo.equals("") || idTienda.equals("") ){
+            JOptionPane.showMessageDialog(null, "Ingrese CAMPOS OBLIGATORIOS");
+        }else{
+           Producto  ingresar = new Producto(nombre, fabricante, codigo, cantidad, precio , idTienda, descripcion, garantia);
+            conexion_DB.Producto_DB agregar = new Producto_DB();
+            if(!agregar.insertarProducto(ingresar))
+                {
+                        JOptionPane.showMessageDialog(null, "Ingreso Incorrrecto");   
+                }else{
+                JOptionPane.showMessageDialog(null, "Ingresó nuevo Empleado");
+                Principal_E regresar = new Principal_E();
+                regresar.setVisible(true);
+                this.setVisible(false);
+             }
+        }
+    }//GEN-LAST:event_registrarProducto1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -290,12 +409,10 @@ public class Registrar_Producto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField productoDescripcion;
     private javax.swing.JTextField productoGarantia;
     private javax.swing.JTextField productoNombre;
+    private javax.swing.JTextField productoNombre1;
     private javax.swing.JTextField productoPrecio;
     private javax.swing.JTextField productoTiendaC;
-    private javax.swing.JComboBox<String> productoTiendaCodigo;
     private javax.swing.JTextField productoTiendaI;
-    private javax.swing.JButton registrar;
-    private javax.swing.JButton registrar1;
-    private javax.swing.JButton registrarProducto;
+    private javax.swing.JButton registrarProducto1;
     // End of variables declaration//GEN-END:variables
 }

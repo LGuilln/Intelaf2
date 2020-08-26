@@ -47,7 +47,7 @@ public class Principal_C extends javax.swing.JFrame {
         rastrear = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Trabajador ");
+        setTitle("Cliente");
         setBackground(new java.awt.Color(0, 255, 51));
         setForeground(new java.awt.Color(102, 255, 51));
 

@@ -45,8 +45,6 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
         clienteTelefono = new javax.swing.JTextField();
         clienteDireccion = new javax.swing.JTextField();
         lblDescripcion = new javax.swing.JLabel();
-        registrar = new javax.swing.JButton();
-        registrar1 = new javax.swing.JButton();
         registrarProducto = new javax.swing.JButton();
         clienteCorreo = new javax.swing.JTextField();
         lblGarantia1 = new javax.swing.JLabel();
@@ -127,24 +125,6 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
         lblDescripcion.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblDescripcion.setText("Direccion:");
 
-        registrar.setBackground(new java.awt.Color(102, 255, 0));
-        registrar.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar.setText("Registrar");
-        registrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarActionPerformed(evt);
-            }
-        });
-
-        registrar1.setBackground(new java.awt.Color(102, 255, 0));
-        registrar1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar1.setText("Atras");
-        registrar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrar1ActionPerformed(evt);
-            }
-        });
-
         registrarProducto.setBackground(new java.awt.Color(102, 255, 0));
         registrarProducto.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         registrarProducto.setText("Registrar");
@@ -169,11 +149,7 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(146, Short.MAX_VALUE)
-                .addComponent(registrar)
-                .addGap(284, 284, 284)
-                .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(309, 309, 309)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(registrarProducto)
                 .addGap(116, 116, 116))
             .addGroup(layout.createSequentialGroup()
@@ -211,7 +187,7 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
                         .addComponent(lblDescripcion)
                         .addGap(18, 18, 18)
                         .addComponent(clienteDireccion)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,10 +216,7 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
                     .addComponent(lblDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clienteDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registrar)
-                    .addComponent(registrar1)
-                    .addComponent(registrarProducto))
+                .addComponent(registrarProducto)
                 .addGap(44, 44, 44))
         );
 
@@ -253,14 +226,6 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
     private void clienteDPIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteDPIActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_clienteDPIActionPerformed
-
-    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrarActionPerformed
-
-    private void registrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrar1ActionPerformed
 
     private void registrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarProductoActionPerformed
 
@@ -281,8 +246,7 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
             Cliente ingresar = new Cliente(nombre, nit, telefono, creditoCompra, dpi, correo, direccion);
             conexion_DB.Cliente_DB agregar = new Cliente_DB();
             if (!agregar.insertarCliente(ingresar)) {
-                JOptionPane.showMessageDialog(null, "Ingreso Incorrrecto" + nombre + "Dato no Valido" + nit + "Dato no Valido"
-                        + telefono + "DDato no Valido" + creditoCompra + "Dato no Valido" + dpi + "Dato no Valido" + correo + "Dato no Valido" + direccion + "Dato no Valido");
+                JOptionPane.showMessageDialog(null, "Ingreso Incorrrecto");
 
             } else {
                 JOptionPane.showMessageDialog(null, "Ingresó nuevo Cliente");
@@ -382,8 +346,6 @@ public class Registrar_Cliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblGarantia1;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
-    private javax.swing.JButton registrar;
-    private javax.swing.JButton registrar1;
     private javax.swing.JButton registrarProducto;
     // End of variables declaration//GEN-END:variables
 }

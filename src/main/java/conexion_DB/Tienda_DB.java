@@ -45,6 +45,29 @@ public class Tienda_DB extends Conexion{
         }
     
          }
+    
+      public Tienda obtenerTienda(){
+        
+        Tienda tienda = null;
+        Conexion conexion = new Conexion();        
+        
+        PreparedStatement obtener = null;
+        
+        ResultSet rs = conexion.getTodo("SELECT * FROM TIENDA LIMIT 1");
+        try {
+            while (rs.next()) {
+                tienda = new Tienda(rs.getString("Nombre_Tienda"), rs.getString("Direccion"), rs.getString("Codigo_Tienda"), rs.getString("Telefono_1"));
+                
+            }
+
+        } catch (Exception e) {
+
+        }
+
+        
+        return tienda;
+    
+    }
      
     
 }

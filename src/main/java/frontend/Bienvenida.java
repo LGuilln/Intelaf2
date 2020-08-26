@@ -40,56 +40,73 @@ public class Bienvenida extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botonPrincipal = new javax.swing.JButton();
+        botonempledos = new javax.swing.JButton();
         logo = new javax.swing.JLabel();
+        botonclientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Bienvenida");
         setBackground(new java.awt.Color(0, 255, 51));
         setForeground(new java.awt.Color(102, 255, 51));
 
-        botonPrincipal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        botonPrincipal.setText("Iniciar");
-        botonPrincipal.addActionListener(new java.awt.event.ActionListener() {
+        botonempledos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        botonempledos.setText("Empleados");
+        botonempledos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonPrincipalActionPerformed(evt);
+                botonempledosActionPerformed(evt);
             }
         });
 
         logo.setText("Icono");
+
+        botonclientes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        botonclientes.setText("CLientes");
+        botonclientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonclientesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(botonPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(180, 180, 180)
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(189, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(botonclientes, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonempledos)
+                .addGap(125, 125, 125))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addComponent(botonPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonempledos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonclientes, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPrincipalActionPerformed
+    private void botonempledosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonempledosActionPerformed
         this.setVisible(false);
         new Inicio_Empleados().setVisible(true);
         
-    }//GEN-LAST:event_botonPrincipalActionPerformed
+    }//GEN-LAST:event_botonempledosActionPerformed
+
+    private void botonclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonclientesActionPerformed
+           this.setVisible(false);
+           new Inicio_Clientes().setVisible(true);
+    }//GEN-LAST:event_botonclientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -118,6 +135,8 @@ public class Bienvenida extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -139,7 +158,8 @@ public class Bienvenida extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonPrincipal;
+    private javax.swing.JButton botonclientes;
+    private javax.swing.JButton botonempledos;
     public javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 }

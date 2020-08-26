@@ -39,8 +39,6 @@ public class Registrar_Tienda extends javax.swing.JInternalFrame {
         lblCodigo = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
         lblGarantia = new javax.swing.JLabel();
-        registrar = new javax.swing.JButton();
-        registrar1 = new javax.swing.JButton();
         lblPrecio1 = new javax.swing.JLabel();
         lblCodigoFabricante1 = new javax.swing.JLabel();
         tiendaNombre = new javax.swing.JTextField();
@@ -72,24 +70,6 @@ public class Registrar_Tienda extends javax.swing.JInternalFrame {
 
         lblGarantia.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         lblGarantia.setText("Telefono 2:");
-
-        registrar.setBackground(new java.awt.Color(102, 255, 0));
-        registrar.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar.setText("Registrar");
-        registrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarActionPerformed(evt);
-            }
-        });
-
-        registrar1.setBackground(new java.awt.Color(102, 255, 0));
-        registrar1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar1.setText("Atras");
-        registrar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrar1ActionPerformed(evt);
-            }
-        });
 
         lblPrecio1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         lblPrecio1.setText("Horario:");
@@ -173,10 +153,6 @@ public class Registrar_Tienda extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(registrar)
-                        .addGap(345, 345, 345)
-                        .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(267, 267, 267)
                         .addComponent(registrarProducto))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
@@ -245,23 +221,12 @@ public class Registrar_Tienda extends javax.swing.JInternalFrame {
                             .addComponent(lblCodigoFabricante1)
                             .addComponent(tiendaCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registrar)
-                    .addComponent(registrar1)
-                    .addComponent(registrarProducto))
+                .addComponent(registrarProducto)
                 .addGap(44, 44, 44))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrarActionPerformed
-
-    private void registrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrar1ActionPerformed
 
     private void tiendaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiendaNombreActionPerformed
 
@@ -374,8 +339,6 @@ public class Registrar_Tienda extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblPrecio1;
-    private javax.swing.JButton registrar;
-    private javax.swing.JButton registrar1;
     private javax.swing.JButton registrarProducto;
     private javax.swing.JTextField tiendaCodigo;
     private javax.swing.JTextField tiendaCorreo;

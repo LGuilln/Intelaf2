@@ -33,8 +33,6 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        registrar = new javax.swing.JButton();
-        registrar1 = new javax.swing.JButton();
         lblPrecio = new javax.swing.JLabel();
         empleadoNIT = new javax.swing.JTextField();
         lblGarantia = new javax.swing.JLabel();
@@ -56,24 +54,6 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Registrar Empleados");
-
-        registrar.setBackground(new java.awt.Color(102, 255, 0));
-        registrar.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar.setText("Registrar");
-        registrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarActionPerformed(evt);
-            }
-        });
-
-        registrar1.setBackground(new java.awt.Color(102, 255, 0));
-        registrar1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        registrar1.setText("Atras");
-        registrar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrar1ActionPerformed(evt);
-            }
-        });
 
         lblPrecio.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblPrecio.setText("Nit:");
@@ -169,11 +149,7 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(registrar)
-                .addGap(284, 284, 284)
-                .addComponent(registrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(registrarProducto)
                 .addGap(117, 117, 117))
             .addGroup(layout.createSequentialGroup()
@@ -240,23 +216,12 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
                     .addComponent(lblDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(empleadoDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registrar)
-                    .addComponent(registrar1)
-                    .addComponent(registrarProducto))
+                .addComponent(registrarProducto)
                 .addGap(44, 44, 44))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrarActionPerformed
-
-    private void registrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_registrar1ActionPerformed
 
     private void empleadoNITKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_empleadoNITKeyTyped
         char caracter = evt.getKeyChar();
@@ -329,22 +294,21 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
 
         String nombre = empleadoNombre.getText();
         String codigo = empleadoCodigo.getText();
-        String nit = empleadoNIT.getText();
         String telefono = empleadoTelefono.getText();
         String dpi = empleadoDPI.getText();
+        String nit = empleadoNIT.getText();
         String correo = empleadoCorreo.getText();
         String direccion = empleadoDireccion.getText();
         
-                if(empleadoNombre.equals("") ||empleadoCodigo.equals("") || empleadoTelefono.equals("") || empleadoDPI.equals("") || empleadoCorreo.equals("") 
+                if(nombre.equals("") ||codigo.equals("") || telefono.equals("") || dpi.equals("") || correo.equals("") 
                         || empleadoDireccion.equals("")){
             JOptionPane.showMessageDialog(null, "Faltan Campos Obligatorios");
         }else{
-            Empleado  ingresar = new Empleado(nombre, codigo, nit, telefono, dpi, correo, direccion);
+            Empleado  ingresar = new Empleado(nombre, codigo, telefono, dpi, nit, correo, direccion);
             conexion_DB.Empleado_DB agregar = new Empleado_DB();
             if(!agregar.insertarEmpleado(ingresar))
                 {
-                        JOptionPane.showMessageDialog(null, "Ingreso Incorrrecto" + nombre + "Dato no Valido" + codigo +"Dato no Valido" + nit + "Dato no Valido"
-                        + telefono +  "Dato no Valido" + dpi + "Dato no Valido" + correo + "Dato no Valido" + direccion + "Dato no Valido");   
+                        JOptionPane.showMessageDialog(null, "Ingreso Incorrrecto");   
                 }else{
                 JOptionPane.showMessageDialog(null, "Ingresó nuevo Empleado");
                 Principal_E regresar = new Principal_E();
@@ -384,8 +348,6 @@ public class Registrar_Empleado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblGarantia1;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;
-    private javax.swing.JButton registrar;
-    private javax.swing.JButton registrar1;
     private javax.swing.JButton registrarProducto;
     // End of variables declaration//GEN-END:variables
 }
